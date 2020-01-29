@@ -35,7 +35,10 @@ $app = new Laravel\Lumen\Application(
 | your own bindings here if you like or you can make another file.
 |
 */
-
+$app->middleware([
+    //App\Http\Middleware\CORSMiddleware::class
+    'CorsMiddleware' => App\Http\Middleware\CORSMiddleware::class,
+]);
 $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
     App\Exceptions\Handler::class
@@ -45,6 +48,11 @@ $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
     App\Console\Kernel::class
 );
+$app->routeMiddleware([
+    'jwt.auth' => App\Http\Middleware\JwtMiddleware::class,
+]);
+
+$app->register(App\Providers\AppServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------

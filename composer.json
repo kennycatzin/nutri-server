@@ -6,8 +6,11 @@
     "type": "project",
     "require": {
         "php": "^7.2",
+        "firebase/php-jwt": "^5.0",
         "laravel/homestead": "^9.2",
-        "laravel/lumen-framework": "^6.0"
+        "laravel/lumen-framework": "^6.0",
+        "kalani/validation-rule-generator": "dev-master",
+        "guzzlehttp/guzzle": "^6.3"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.4",

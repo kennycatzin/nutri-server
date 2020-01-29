@@ -14,6 +14,34 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
-$router->get('/hola', function () use ($router) {
-    return 'holaaaaa';
+$router->post(
+    'auth/login', 
+    [
+       'uses' => 'AuthController@authenticate'
+    ]
+);
+$router->group(
+    ['middleware' => 'jwt.auth'], 
+    function() use ($router) {
+        $router->get('users', function() {
+            $users = \App\User::all();
+            return response()->json($users);
+        });
+    }
+);
+
+$router->group(['prefix' => 'api/alimentos'], function () use ($router) {
+    $router->get('', 'AlimentoController@index');
+    $router->get('{id}', 'AlimentoController@show');
+    $router->post('', 'AlimentoController@store');
+
+});
+
+$router->group(['prefix' => 'api/clasificaciones'], function () use ($router) {
+    $router->get('', 'clasificacionController@index');
+    $router->get('{id}', 'clasificacionController@show');
+    $router->post('', 'clasificacionController@store');
+    $router->patch('{id}', 'clasificacionController@update');
+
+
 });
