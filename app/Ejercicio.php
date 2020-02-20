@@ -15,7 +15,8 @@ class Ejercicio extends Model
 
     public function clasificacion()
     {
-        return $this->hasOne('App\Clasificacion');
+        return $this->belongsTo('App\Clasificacion');
+
     }
     
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Alimento;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 class AlimentoController extends Controller
 {
     public function index() {
@@ -21,7 +23,7 @@ class AlimentoController extends Controller
         }
         return $this->crearRespuestaError('No existe el id', 300);      
     }
-    public function update(Request $request, $id) {
+    public function update($id, Request $request) {
         $alimento = Alimento::find($id);
         if ($alimento){
             $this->validacion($request);
@@ -58,6 +60,22 @@ class AlimentoController extends Controller
             'carbohidratos'=>'required'
         ];
         $this->validate($request, $reglas);
+    }
+    public function busqueda($valor){
+        $query = Alimento::orWhere('nombre', 'LIKE', '%'.$valor.'%')->get();
+        return $this->crearRespuesta($query, 200);
+
+    }
+    public function paginacion($valor){
+        $desde=0;
+        $hasta=6;
+        if($valor>0){
+            $desde+=$valor;
+            $hasta+=$valor;
+        }
+        $query = DB::table('alimentos')->skip($desde)->take($hasta)->get();
+        return $this->crearRespuesta($query, 200);
+
     }
 }
  

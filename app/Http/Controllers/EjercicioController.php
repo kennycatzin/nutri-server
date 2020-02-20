@@ -3,10 +3,17 @@
 namespace App\Http\Controllers;
 use App\Ejercicio;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 class EjercicioController extends Controller
 {
     public function index() {
-        $ejercicio=Ejercicio::all();
+        //$ejercicio=Ejercicio::all()->leftJoin('clasificaciones', 'clasificacion.id', '=', 'ejercicios.clasificacion_id');
+        $ejercicio = DB::table('ejercicios')
+            ->join('clasificaciones', 'clasificaciones.id', '=', 'ejercicios.clasificacion_id')
+            ->select('ejercicios.*', 'clasificaciones.nombre AS clasificacion')
+            ->get();
+        
         return $this->crearRespuesta($ejercicio, 200);
     }
     public function store(Request $request) {
@@ -56,5 +63,31 @@ class EjercicioController extends Controller
         ];
         $this->validate($request, $reglas);
     }
+    public function busqueda($valor){
+        $query = $query = DB::table('ejercicios')
+        ->join('clasificaciones', 'clasificaciones.id', '=', 'ejercicios.clasificacion_id')
+        ->select('ejercicios.*', 'clasificaciones.nombre AS clasificacion')
+        ->orWhere('ejercicios.nombre', 'LIKE', '%'.$valor.'%')
+        ->get();
+        return $this->crearRespuesta($query, 200);
+
+    }
+    public function paginacion($valor){
+        $desde=0;
+        $hasta=6;
+        if($valor>0){
+            $desde+=$valor;
+            $hasta+=$valor;
+        }
+        $query = DB::table('ejercicios')
+        ->join('clasificaciones', 'clasificaciones.id', '=', 'ejercicios.clasificacion_id')
+        ->select('ejercicios.*', 'clasificaciones.nombre AS clasificacion')
+        ->skip($desde)
+        ->take($hasta)
+        ->get();
+        return $this->crearRespuesta($query, 200);
+
+    }
 }
+
  

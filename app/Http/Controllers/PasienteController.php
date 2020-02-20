@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Pasiente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 class PasienteController extends Controller
 {
     public function index() {
@@ -23,7 +25,7 @@ class PasienteController extends Controller
     }
     public function update(Request $request, $id) {
         $pasiente = Pasiente::find($id);
-        if ($pasiente){
+        if  (!is_null($pasiente)){
             $this->validacion($request);
             $nombres = $request->get('nombres');
             $apellidopaterno = $request->get('apellidopaterno');
@@ -35,23 +37,23 @@ class PasienteController extends Controller
 
 
             
-            $ejercicio->nombres = $nombres;
-            $ejercicio->apellidopaterno = $apellidopaterno;
-            $ejercicio->apellidomaterno = $apellidomaterno;
-            $ejercicio->fechanacimiento = $fechanacimiento;
-            $ejercicio->estatura = $estatura; 
-            $ejercicio->objetivo = $objetivo;          
-            $ejercicio->genero = $genero;
+            $pasiente->nombres = $nombres;
+            $pasiente->apellidopaterno = $apellidopaterno;
+            $pasiente->apellidomaterno = $apellidomaterno;
+            $pasiente->fechanacimiento = $fechanacimiento;
+            $pasiente->estatura = $estatura; 
+            $pasiente->objetivo = $objetivo;          
+            $pasiente->genero = $genero;
 
-            $ejercicio->save();
+            $pasiente->save();
             return $this->crearRespuesta('El elemento ha sido modificado', 201);
         }
         return $this->crearRespuestaError('No existe el id', 300);
     }
     public function destroy($id) {
-        $ejercicio = Ejercicio::find($id);
-        if ($ejercicio){
-            $ejercicio->delete();
+        $pasiente = Pasiente::find($id);
+        if ($pasiente){
+            $pasiente->delete();
             return $this->crearRespuesta('El elemento ha sido eliminado', 201);
         }
         return $this->crearRespuestaError('No existe el id', 300);
@@ -68,6 +70,25 @@ class PasienteController extends Controller
             
         ];
         $this->validate($request, $reglas);
+    }
+    public function busqueda($valor){
+        $query = Pasiente::orWhere('nombres', 'LIKE', '%'.$valor.'%')
+        ->orWhere('apellidopaterno', 'LIKE', '%'.$valor.'%')
+        ->orWhere('apellidomaterno', 'LIKE', '%'.$valor.'%')
+        ->get();
+        return $this->crearRespuesta($query, 200);
+
+    }
+    public function paginacion($valor){
+        $desde=0;
+        $hasta=6;
+        if($valor>0){
+            $desde+=$valor;
+            $hasta+=$valor;
+        }
+        $query = DB::table('pasientes')->skip($desde)->take($hasta)->get();
+        return $this->crearRespuesta($query, 200);
+
     }
 }
  

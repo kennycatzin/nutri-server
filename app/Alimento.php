@@ -13,9 +13,10 @@ class Alimento extends Model
         'id', 'nombre', 'clasificacion_id', 'proteinas', 'grasas', 'carbohidratos'
     ];
 
-    public function clasificacion()
+    public function clasificaciones()
     {
-        return $this->hasOne('App\Clasificacion');
+        
+        return $this->belongsTo('App\Clasificacion');
     }
    
 }

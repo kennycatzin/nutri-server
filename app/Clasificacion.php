@@ -13,6 +13,12 @@ class Clasificacion extends Model
         'id', 'nombre', 'tipo'
     ];
 
-    
-   
+    public function ejercicios()
+    {
+        return $this->hasMany('App\Ejercicio');
+    }
+    public function alimentos()
+    {
+        return $this->hasMany('App\Alimento');
+    }
 }

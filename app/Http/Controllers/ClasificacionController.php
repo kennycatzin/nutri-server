@@ -5,6 +5,19 @@ use App\Clasificacion;
 use Illuminate\Http\Request;
 class ClasificacionController extends Controller
 {
+    public function indexMuscular() {
+        $clasificacion=Clasificacion::all()->where('tipo', 'muscular');
+        return response()->json(['data' => $clasificacion], 200);
+    }
+    public function indexAlimentacion() {
+        $clasificacion=Clasificacion::all()->where('tipo', 'alimentacion');
+        return $this->crearRespuesta($clasificacion, 200);
+    }
+    public function indexOtro() {
+        $clasificacion=Clasificacion::all()->where('tipo', 'otro');
+        return $this->crearRespuesta($clasificacion, 200);
+    }
+
     public function index() {
         $clasificacion=Clasificacion::all();
         return $this->crearRespuesta($clasificacion, 200);

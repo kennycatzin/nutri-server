@@ -10,7 +10,7 @@ class Pasiente extends Model
     protected $table = 'pasientes';
 
     protected $fillable = [
-        'id', 'apellidopaterno', 'apellidomaterno', 'nombres', 'fechanacimiento', 'estatura', 'objetivo', 'fecharegistro', 'genero'
+        'id', 'apellidopaterno', 'apellidomaterno', 'nombres', 'fechanacimiento', 'estatura', 'objetivo', 'genero'
     ];
 
     
