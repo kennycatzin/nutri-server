@@ -3,15 +3,21 @@
 namespace App\Http\Controllers;
 use App\Clasificacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 class ClasificacionController extends Controller
 {
-    public function indexMuscular() {
-        $clasificacion=Clasificacion::all()->where('tipo', 'muscular');
-        return response()->json(['data' => $clasificacion], 200);
+    public function muscular() {
+        $clasificacion=Clasificacion::all()->where('tipo', 'MUSCULAR');
+        return  $this->crearRespuesta($clasificacion, 200);
     }
-    public function indexAlimentacion() {
-        $clasificacion=Clasificacion::all()->where('tipo', 'alimentacion');
-        return $this->crearRespuesta($clasificacion, 200);
+    public function alimentacion() {
+
+        $clasificacion=Clasificacion::where('tipo', 'ALIMENTACION')->get();
+        return  $this->crearRespuesta($clasificacion, 200);
+
+
+        return response()->json(['data' => $clasificacion], 200);
     }
     public function indexOtro() {
         $clasificacion=Clasificacion::all()->where('tipo', 'otro');
@@ -66,6 +72,21 @@ class ClasificacionController extends Controller
             
         ];
         $this->validate($request, $reglas);
+    }
+    public function paginacion($valor){
+        $desde=0;
+        $hasta=6;
+        if($valor>0){
+            $desde+=$valor;
+            $hasta+=$valor;
+        }
+        $query = DB::table('clasificaciones')->skip($desde)->take($hasta)->get();
+        return $this->crearRespuesta($query, 200);
+    }
+    public function busqueda($valor){
+        $query = Clasificacion::orWhere('nombre', 'LIKE', '%'.$valor.'%')->get();
+        return $this->crearRespuesta($query, 200);
+
     }
 }
  

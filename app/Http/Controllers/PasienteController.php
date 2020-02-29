@@ -4,9 +4,57 @@ namespace App\Http\Controllers;
 use App\Pasiente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use File;
 
 class PasienteController extends Controller
 {
+    public function fileUpload(Request $request, $id) {
+        $pasiente = Pasiente::find($id);
+        $response = null;
+        $user = (object) ['image' => ""];
+        if  (!is_null($pasiente)){
+            if ($request->hasFile('image')) {
+                $original_filename = $request->file('image')->getClientOriginalName();
+                $original_filename_arr = explode('.', $original_filename);
+                $file_ext = end($original_filename_arr);
+                $destination_path = './upload/user/';
+                $image = 'U-' . $id . '.' . $file_ext;
+    
+                if ($request->file('image')->move($destination_path, $image)) {
+                    $user->image = '/upload/user/' . $image;
+                   
+                    $pasiente->imagen = $image;
+    
+                    $pasiente->save();
+                return $this->crearRespuesta('La imagen ha sido subida con éxito', 201);
+                } else {
+                    return $this->crearRespuestaError('Ha ocurrido un error con la imagen', 400);
+                }
+            } else {
+                return $this->crearRespuestaError('No existe el archivo', 400);
+            }
+
+        }else{
+            return $this->crearRespuestaError('No existe el usuario', 400);
+        }
+    }
+    public function imagenUsuario($id) {
+        $path = resource_path() . './upload/user/' . 'U-'.$id. 'png';
+
+        if(!File::exists($path)) {
+            return response()->json(['message' => 'Image not found.'], 404);
+        }
+    
+        $file = File::get($path);
+        $type = File::mimeType($path);
+    
+        $response = Response::make($file, 200);
+        $response->header("Content-Type", $type);
+
+
+        return $response;
+    }
     public function index() {
         $pasiente=Pasiente::all();
         return $this->crearRespuesta($pasiente, 200);
@@ -34,6 +82,8 @@ class PasienteController extends Controller
             $estatura = $request->get('estatura');
             $objetivo = $request->get('objetivo');
             $genero = $request->get('genero');
+            $correo = $request->get('correo');
+
 
 
             
@@ -44,6 +94,7 @@ class PasienteController extends Controller
             $pasiente->estatura = $estatura; 
             $pasiente->objetivo = $objetivo;          
             $pasiente->genero = $genero;
+            $pasiente->correo = $correo;
 
             $pasiente->save();
             return $this->crearRespuesta('El elemento ha sido modificado', 201);
@@ -61,6 +112,7 @@ class PasienteController extends Controller
     public function validacion($request){
         $reglas = [
             'nombres'=>'required',
+            'correo'=>'required|unique:pasientes',
             'apellidopaterno'=>'required',
             'apellidomaterno'=>'required',
             'fechanacimiento'=>'required',
