@@ -150,7 +150,7 @@ class SesionController extends Controller
         public function consultaEntrenamiento($sesionId) {
             echo $sesionId;
             $query = DB::table('sesiones')
-                ->join('entrenamientos', 'entrenamientos.sesion_id', '=', 'sesiones.id')
+                ->join('entrenamientos', 'sesiones.id', '=', 'entrenamientos.sesion_id')
                 ->join('seccionado', 'seccionado.entrenamiento_id', '=', 'entrenamientos.id')
                 ->join('programas', 'programas.seccionado_id', '=', 'seccionado.id')
                 ->join('det_programas', 'det_programas.programa_id', '=', 'programas.id')
