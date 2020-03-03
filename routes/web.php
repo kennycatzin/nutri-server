@@ -73,7 +73,7 @@ $router->group(['prefix' => 'api/clasificaciones'], function () use ($router) {
 });
 $router->group(['prefix' => 'api/sesiones'], function () use ($router) {
 
-    $router->post('{id}', 'SesionController@store');
+    $router->get('', 'SesionController@sendPDFs');
    
 });
 

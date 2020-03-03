@@ -5,6 +5,8 @@ use App\Sesion;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\Mail;
 
 class SesionController extends Controller
 {
@@ -78,6 +80,20 @@ class SesionController extends Controller
     }
     public function destroy() {
         return "desde destroy";
+    }
+    public function sendPDFs(){
+        $data = [
+            'nombre' => 'Jaded Enrique Ruiz Pech',
+            'peso' => '74 Kilos'
+        ];
+        $datos=[];
+        $pdf1 = PDF::loadView('vista',compact('data'));
+        $pdf2 = PDF::loadView('vista_dos', compact('data'));
+        Mail::send('email.credentials', $datos, function($message)
+        {
+            $message->to('xxxxxx@gmail.com', 'Jon Doe')->subject('Welcome!');
+        });
+        return "Message Enviado";
     }
 }
  
