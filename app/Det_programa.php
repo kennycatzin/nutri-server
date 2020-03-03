@@ -10,7 +10,7 @@ class Alimento extends Model
     protected $table = 'det_programas';
 
     protected $fillable = [
-        'id', 'nombre', 'clasificacion_id', 'proteina', 'grasas', 'carbohidratos'
+        'id', 'repeticiones', 'vueltas', 'ejercicio_id', 'programa_id'
     ];
 
     public function programa()

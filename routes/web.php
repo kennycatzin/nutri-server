@@ -70,6 +70,11 @@ $router->group(['prefix' => 'api/clasificaciones'], function () use ($router) {
     $router->delete('{id}', 'clasificacionController@destroy');
     $router->get('paginacion/{desde}', 'clasificacionController@paginacion');
     $router->get('busqueda/{valor}', 'clasificacionController@busqueda');
-
 });
+$router->group(['prefix' => 'api/sesiones'], function () use ($router) {
+
+    $router->post('{id}', 'SesionController@store');
+   
+});
+
 

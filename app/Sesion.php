@@ -10,7 +10,7 @@ class Sesion extends Model
     protected $table = 'sesiones';
 
     protected $fillable = [
-        'id', 'fecha', 'sesion', 'imc', 'peso', 'pctgrasa'
+        'id', 'sesion', 'imc', 'peso', 'pctgrasa'
     ];
 
     
