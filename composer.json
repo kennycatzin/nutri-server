@@ -10,7 +10,6 @@
         "laravel/homestead": "^9.2",
         "laravel/lumen-framework": "^6.0",
         "illuminate/filesystem": "5.*" ,
-        "kalani/validation-rule-generator": "dev-master",
         "guzzlehttp/guzzle": "^6.3"
     },
     "require-dev": {

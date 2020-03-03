@@ -15,12 +15,8 @@ class SesionController extends Controller
     public function store(Request $request, $id) {
         $json = json_encode($request->input());
         $ojso = json_decode($json, true);
-       // $date = new DateTime();
-
-        //$vari=$json->ana_clinico;
       // Analsis clinico
-      $mytime = Carbon::now();
-        $analClinico = $ojso["ana_clinico"];
+        $mytime = Carbon::now();
         DB::table('sesiones')->insert(
             ['sesion' => $request->get('sesion'), 
             'imc' => $request->get('imc'),
@@ -30,49 +26,142 @@ class SesionController extends Controller
             'updated_at'=> $mytime
             ]
         );
-        $id = DB::getPdo()->lastInsertId();
-        echo $id;
-
-        // DB::table('anaclinicos')->insert(
-        //     ['colesterol' => $analClinico["colesterol"], 
-        //     'trigliceridos' => $analClinico["trigliceridos"],
-        //     'glucosa'=> $analClinico["glucosa"],
-        //     'presionarterial'=> $analClinico["presionarterial"],
-        //     'pctritmocardiaco'=> $analClinico["pctritmocardiaco"],
-        //     'sesion_id'=> $analClinico["pctritmocardiaco"],
-        //     'created_at'=> $date,
-        //     'updated_at'=> $date
-        //     ]
-        // );
-
-
+        $sesionId = DB::getPdo()->lastInsertId();
+        if($request->get("ana_clinico")){
+            $analClinico = $ojso["ana_clinico"];
+            DB::table('anaclinicos')->insert(
+                ['colesterol' => $analClinico["colesterol"], 
+                'trigliceridos' => $analClinico["trigliceridos"],
+                'glucosa'=> $analClinico["glucosa"],
+                'presionarterial'=> $analClinico["presionarterial"],
+                'pctritmocardiaco'=> $analClinico["pctritmocardiaco"],
+                'sesion_id'=> $sesionId,
+                'created_at'=> $mytime,
+                'updated_at'=> $mytime
+                ]
+            );
+        }
+       
         // DIETA
-        $dieta = $ojso["dieta"];
-        $comidas = $dieta["comidas"];
-        $detalleComida = $comidas[1]["det_comidas"];
-
+        if($request->get("dieta")){
+            $dieta = $ojso["dieta"];
+            DB::table('dietas')->insert(
+                ['totcalorias' => $dieta["totcalorias"], 
+                'pasiente_id'=> 1,
+                'notas'=> $dieta["notas"],
+                'sesion_id'=> $sesionId,
+                'created_at'=> $mytime,
+                'updated_at'=> $mytime
+                ]
+            );
+            $dietaId = DB::getPdo()->lastInsertId();
+            $comidas = $dieta["comidas"];
+            foreach($comidas as $comida){
+                 $comida['nombre'];
+                 DB::table('comidas')->insert(
+                    ['nombre' => $comida['nombre'], 
+                    'calorias'=> $comida['calorias'],
+                    'dieta_id'=> $dietaId,
+                    'notas'=> $comida['notas'],
+                    'created_at'=> $mytime,
+                    'updated_at'=> $mytime
+                    ]
+                );
+                $comidaId = DB::getPdo()->lastInsertId();
+                $detComidas = $comida['det_comidas'];
+                foreach($detComidas as $detalleComida){
+                    DB::table('det_comidas')->insert(
+                        ['cantidad' => $detalleComida['cantidad'], 
+                        'clasificacion_id'=> 1,
+                        'alimento_id'=> $detalleComida['alimento_id'],
+                        'comida_id'=> $comidaId,
+                        'created_at'=> $mytime,
+                        'updated_at'=> $mytime
+                        ]
+                    );
+                }
+            }
+        }
+       
         // RUTINA
-        $entrenamiento = $ojso["entrenamiento"];
-        $programa = $entrenamiento["programa"];
-        $detallePrograma = $programa[1]["det_programa"];
-
-        
-        print_r($detallePrograma);
-
-        //print_r($request);
-        // foreach($ojso['articulos'] as $articulo){
-        //     $articulo['articulo_id']
-        // }
-        
+        if($request->get("entrenamiento")){
+            $entrenamiento = $ojso["entrenamiento"];
+            DB::table('entrenamientos')->insert(
+                ['pasiente_id' => 1, 
+                'sesion_id'=> $sesionId,
+                'notas'=> $entrenamiento['notas'],
+                'created_at'=> $mytime,
+                'updated_at'=> $mytime
+                ]
+            );
+            $entrenamientoId = DB::getPdo()->lastInsertId();
+            $seccionado = $entrenamiento["seccionado"];
+            $i=0;
+            foreach ($seccionado as $seccion) {
+                DB::table('seccionado')->insert(
+                    ['entrenamiento_id' => $entrenamientoId, 
+                    'dias'=> $seccion['dias'],
+                    'notas'=> $seccion['notas']
+                    ]
+                );
+                $seccionadoId = DB::getPdo()->lastInsertId();
+                $programas = $seccion['programa'];
+                foreach ($programas as $programa) {
+                    DB::table('programas')->insert(
+                        ['nombre' => $programa["nombre"], 
+                        'entrenamiento_id'=> 1,
+                        'notas'=> $programa['notas'],
+                        'seccionado_id'=> $seccionadoId,
     
-        // $arreglo1 = $request->get('comidas');
-        // print_r($arreglo1);
-
+                        ]
+                    );
+                    $programaId = DB::getPdo()->lastInsertId();
+                    $detallePrograma = $programas[$i]["det_programa"];
+                    foreach ($detallePrograma as $detalle) {
+                        DB::table('det_programas')->insert(
+                            ['repeticiones' => $detalle["repeticiones"], 
+                            'vueltas'=>  $detalle["repeticiones"],
+                            'ejercicio_id'=>  $detalle["ejercicio_id"],
+                            'programa_id'=> $programaId,
+                            'created_at'=> $mytime,
+                            'updated_at'=> $mytime
+                            ]
+                        );
+                    }
+                    $i++;  
+                }
+                $i=0;
+            }
+        }
+       
         return $this->crearRespuesta('El elemento ha sido creado'. $id, 201);
     }
-    public function show() {
-        return "desde show";
+    public function consultaDieta($sesionId) {
+        $query = DB::table('sesiones')
+            ->join('dietas', 'dietas.sesion_id', '=', 'sesiones.id')
+            ->join('comidas', 'comidas.dieta_id', '=', 'dietas.id')
+            ->join('det_comidas', 'det_comidas.comida_id', '=', 'comidas.id')
+            ->join('alimentos', 'det_comidas.alimento_id', '=', 'alimentos.id')
+            ->select('sesiones.*', 'dietas.*', 'comidas.*','det_comidas.cantidad', 'alimentos.nombre')
+            ->where('sesiones.id', $sesionId)
+            ->get();
+        return $this->crearRespuesta( $query, 200);
     }
+        public function consultaEntrenamiento($sesionId) {
+            echo $sesionId;
+            $query = DB::table('sesiones')
+                ->join('entrenamientos', 'entrenamientos.sesion_id', '=', 'sesiones.id')
+                ->join('seccionado', 'seccionado.entrenamiento_id', '=', 'entrenamientos.id')
+                ->join('programas', 'programas.seccionado_id', '=', 'seccionado.id')
+                ->join('det_programas', 'det_programas.programa_id', '=', 'programas.id')
+                ->join('ejercicios', 'ejercicios.id', '=', 'det_programas.ejercicio_id')
+                ->select('sesiones.*', 'seccionado.*', 'programas.*','det_programas.*', 'ejercicios.nombre')
+                ->where('sesiones.id', $sesionId)
+                ->get();
+    
+    
+            return $this->crearRespuesta( $query, 200);
+            }    
     public function update() {
         return "desde update";
     }
