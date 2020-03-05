@@ -29,6 +29,7 @@ $router->group(
         });
     }
 );
+$router->get('email', 'HolaController@index');
 
 $router->group(['prefix' => 'api/alimentos'], function () use ($router) {
     $router->get('', 'AlimentoController@index');
@@ -76,9 +77,11 @@ $router->group(['prefix' => 'api/sesiones'], function () use ($router) {
     $router->post('{id}', 'SesionController@store');
     $router->get('prueba/{sesionId}', 'SesionController@consultaDieta');
     $router->get('entrenamiento/{sesionId}', 'SesionController@consultaEntrenamiento');
+    $router->get('email', 'SesionController@update');
 
 
    
 });
+
 
 

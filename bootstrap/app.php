@@ -23,6 +23,7 @@ $app = new Laravel\Lumen\Application(
 
  $app->withFacades();
 
+
  $app->withEloquent();
 
 /*
@@ -64,7 +65,12 @@ $app->register(App\Providers\AppServiceProvider::class);
 | route or middleware that'll be assigned to some specific routes.
 |
 */
+$app->configure('mail');
+$app->configure('services');
 
+$app->alias('mailer', Illuminate\Mail\Mailer::class);
+$app->alias('mailer', Illuminate\Contracts\Mail\Mailer::class);
+$app->alias('mailer', Illuminate\Contracts\Mail\MailQueue::class);
 // $app->middleware([
 //     App\Http\Middleware\ExampleMiddleware::class
 // ]);
