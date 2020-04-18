@@ -78,9 +78,6 @@ $router->group(['prefix' => 'api/sesiones'], function () use ($router) {
     $router->get('prueba/{sesionId}', 'SesionController@consultaDieta');
     $router->get('entrenamiento/{sesionId}', 'SesionController@consultaEntrenamiento');
     $router->get('email', 'SesionController@update');
-
-
-   
 });
 
 
