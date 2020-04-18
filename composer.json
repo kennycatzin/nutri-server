@@ -10,7 +10,8 @@
         "guzzlehttp/guzzle": "^6.5",
         "illuminate/mail": "6.17",
         "laravel/homestead": "^9.2",
-        "laravel/lumen-framework": "^6.2.0"
+        "laravel/lumen-framework": "^6.2.0",
+        "barryvdh/laravel-dompdf": "^0.8.6"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.4",

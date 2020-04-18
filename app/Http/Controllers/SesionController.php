@@ -5,6 +5,8 @@ use App\Sesion;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\Mail;
 
 class SesionController extends Controller
 {
@@ -162,8 +164,34 @@ class SesionController extends Controller
     
             return $this->crearRespuesta( $query, 200);
             }    
-    public function update() {
-      
+    public function sendPDFs(){
+        $data = [
+            'nombre' => 'Jaded Enrique Ruiz Pech',
+            'peso' => '74 Kilos'
+        ];
+        $datos=[];
+        $pdf1 = PDF::loadView('vista',compact('data'));
+        $pdf2 = PDF::loadView('vista_dos', compact('data'));
+        
+        try {
+            $to_name = 'TO_NAME';
+            $to_email = 'razonable3500@gmail.com';
+            $data = array('email' => 'kenn2506@gmail.com');
+                
+            Mail::send('welcome',$data, function($message) use ($pdf1, $pdf2)
+            {
+                $message->from('roly_alme@hotmail.com', 'Laravel');
+            
+                $message->to('razonable3500@gmail.com')->cc('razonable3500@gmail.com');
+                $message->attachData($pdf1->output(),'entrenamiento.pdf');
+                $message->attachData($pdf2->output(),'dieta.pdf');
+            });
+          
+               return "se envio";
+    
+           } catch (\Throwable $th) {
+              echo $th;
+           }
     }
     public function destroy() {
         return "desde destroy";
