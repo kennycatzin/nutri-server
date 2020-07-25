@@ -142,15 +142,16 @@ class SesionController extends Controller
             ->join('comidas', 'comidas.dieta_id', '=', 'dietas.id')
             ->join('det_comidas', 'det_comidas.comida_id', '=', 'comidas.id')
             ->join('alimentos', 'det_comidas.alimento_id', '=', 'alimentos.id')
-            ->select('sesiones.*', 'dietas.*', 'comidas.nombre','det_comidas.cantidad', 'alimentos.nombre')
+            ->select('sesiones.*', 'dietas.*','comidas.nombre as miComida','det_comidas.cantidad', 'alimentos.nombre')
             ->where('sesiones.id', $sesionId)
             ->get();
-        return $this->crearRespuesta( $query, 200);
+        return $query->toJson(JSON_PRETTY_PRINT);
+        //return $this->crearRespuesta( , 200);
     }
         public function consultaEntrenamiento($sesionId) {
             echo $sesionId;
             $query = DB::table('sesiones')
-                ->join('entrenamientos', 'sesiones.id', '=', 'entrenamientos.sesion_id')
+            ->leftJoin('entrenamientos', 'sesiones.id', '=', 'entrenamientos.sesion_id')
                 ->join('seccionado', 'seccionado.entrenamiento_id', '=', 'entrenamientos.id')
                 ->join('programas', 'programas.seccionado_id', '=', 'seccionado.id')
                 ->join('det_programas', 'det_programas.programa_id', '=', 'programas.id')
