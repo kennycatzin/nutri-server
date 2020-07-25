@@ -6,11 +6,18 @@
     "type": "project",
     "require": {
         "php": "^7.2",
+        "barryvdh/laravel-dompdf": "^0.8.6",
         "firebase/php-jwt": "^5.0",
         "guzzlehttp/guzzle": "^6.5",
+<<<<<<< HEAD
         "illuminate/mail": "6.17",
         "laravel/homestead": "^9.2",
         "laravel/lumen-framework": "^6.2.0"
+=======
+        "illuminate/mail": "6.17.*",
+        "laravel/homestead": "^9.2",
+        "laravel/lumen-framework": "^6.0"
+>>>>>>> 1572697dee01c24efb33fef9a4307e81ed6b715e
     },
     "require-dev": {
         "fzaninotto/faker": "^1.4",

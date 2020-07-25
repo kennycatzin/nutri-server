@@ -20,7 +20,7 @@ require_once __DIR__.'/../vendor/autoload.php';
 $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
-
+class_alias(Barryvdh\DomPDF\Facade::class, 'PDF');
  $app->withFacades();
 
 
@@ -89,8 +89,10 @@ $app->alias('mailer', Illuminate\Contracts\Mail\MailQueue::class);
 | totally optional, so you are not required to uncomment this line.
 |
 */
-
-// $app->register(App\Providers\AppServiceProvider::class);
+$app->register(Barryvdh\DomPDF\ServiceProvider::class);
+//$app->register(Illuminate\Mail\MailServiceProvider::class);
+ $app->register(App\Providers\AppServiceProvider::class);
+ $app->configure('services');
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 
