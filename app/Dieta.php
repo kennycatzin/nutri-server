@@ -14,10 +14,7 @@ class Det_comida extends Model
     ];
 
     
-    public function comida()
-    {
-        return $this->hasMany('App\Det_comida');
-    }
+
 }
 
 

@@ -20,8 +20,5 @@ class Comida extends Model
         return $this->belongsTo('App\Dieta');
     }
     
-    public function det_comida()
-    {
-        return $this->hasMany('App\Det_comida');
-    }
+
 }

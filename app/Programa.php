@@ -14,8 +14,5 @@ class Programa extends Model
     ];
 
     
-    public function det_programa()
-    {
-        return $this->hasMany('App\Det_programa');
-    }
+   
 }
