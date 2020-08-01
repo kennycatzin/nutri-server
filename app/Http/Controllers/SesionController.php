@@ -144,16 +144,15 @@ class SesionController extends Controller
             ->join('comidas', 'comidas.dieta_id', '=', 'dietas.id')
             ->join('det_comidas', 'det_comidas.comida_id', '=', 'comidas.id')
             ->join('alimentos', 'det_comidas.alimento_id', '=', 'alimentos.id')
-            ->select('sesiones.*', 'dietas.*','comidas.nombre as miComida','det_comidas.cantidad', 'alimentos.nombre')
+            ->select('sesiones.*', 'dietas.*', 'comidas.nombre','det_comidas.cantidad', 'alimentos.nombre')
             ->where('sesiones.id', $sesionId)
             ->get();
-        return $query->toJson(JSON_PRETTY_PRINT);
-        //return $this->crearRespuesta( , 200);
+        return $this->crearRespuesta( $query, 200);
     }
         public function consultaEntrenamiento($sesionId) {
             echo $sesionId;
             $query = DB::table('sesiones')
-            ->leftJoin('entrenamientos', 'sesiones.id', '=', 'entrenamientos.sesion_id')
+                ->join('entrenamientos', 'sesiones.id', '=', 'entrenamientos.sesion_id')
                 ->join('seccionado', 'seccionado.entrenamiento_id', '=', 'entrenamientos.id')
                 ->join('programas', 'programas.seccionado_id', '=', 'seccionado.id')
                 ->join('det_programas', 'det_programas.programa_id', '=', 'programas.id')
@@ -165,12 +164,6 @@ class SesionController extends Controller
     
             return $this->crearRespuesta( $query, 200);
             }    
-    public function update() {
-      
-    }
-    public function destroy() {
-        return "desde destroy";
-    }
     public function sendPDFs(){
         $data = [
             'nombre' => 'Jaded Enrique Ruiz Pech',
@@ -182,14 +175,14 @@ class SesionController extends Controller
         
         try {
             $to_name = 'TO_NAME';
-            $to_email = 'kenn2506@gmail.com';
+            $to_email = 'razonable3500@gmail.com';
             $data = array('email' => 'kenn2506@gmail.com');
                 
             Mail::send('welcome',$data, function($message) use ($pdf1, $pdf2)
             {
                 $message->from('roly_alme@hotmail.com', 'Laravel');
             
-                $message->to('kenn2506@gmail.com')->cc('kenn2506@gmail.com');
+                $message->to('razonable3500@gmail.com')->cc('razonable3500@gmail.com');
                 $message->attachData($pdf1->output(),'entrenamiento.pdf');
                 $message->attachData($pdf2->output(),'dieta.pdf');
             });
@@ -199,6 +192,9 @@ class SesionController extends Controller
            } catch (\Throwable $th) {
               echo $th;
            }
+    }
+    public function destroy() {
+        return "desde destroy";
     }
 }
  

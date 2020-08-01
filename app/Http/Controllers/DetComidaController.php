@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 class DetComidaController extends Controller
 {
     public function index() {
-        return "desde index";
+        return "desde aqui index";
     }
     public function store() {
         return "desde store";
