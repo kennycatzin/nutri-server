@@ -179,11 +179,26 @@ class SesionController extends Controller
         $datos=[];
         $pdf1 = PDF::loadView('vista',compact('data'));
         $pdf2 = PDF::loadView('vista_dos', compact('data'));
-        Mail::send('email.credentials', $datos, function($message)
-        {
-            $message->to('xxxxxx@gmail.com', 'Jon Doe')->subject('Welcome!');
-        });
-        return "Message Enviado";
+        
+        try {
+            $to_name = 'TO_NAME';
+            $to_email = 'kenn2506@gmail.com';
+            $data = array('email' => 'kenn2506@gmail.com');
+                
+            Mail::send('welcome',$data, function($message) use ($pdf1, $pdf2)
+            {
+                $message->from('roly_alme@hotmail.com', 'Laravel');
+            
+                $message->to('kenn2506@gmail.com')->cc('kenn2506@gmail.com');
+                $message->attachData($pdf1->output(),'entrenamiento.pdf');
+                $message->attachData($pdf2->output(),'dieta.pdf');
+            });
+          
+               return "se envio";
+    
+           } catch (\Throwable $th) {
+              echo $th;
+           }
     }
 }
  
