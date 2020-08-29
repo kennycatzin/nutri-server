@@ -63,7 +63,8 @@ class EjercicioController extends Controller
         ];
         $this->validate($request, $reglas);
     }
-    public function busqueda($valor){
+    public function busqueda(Request $request){
+        $valor = $request['busqueda'];
         $query = $query = DB::table('ejercicios')
         ->join('clasificaciones', 'clasificaciones.id', '=', 'ejercicios.clasificacion_id')
         ->select('ejercicios.*', 'clasificaciones.nombre AS clasificacion')

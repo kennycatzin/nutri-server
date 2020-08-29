@@ -12,20 +12,18 @@ class PasienteController extends Controller
     public function fileUpload(Request $request, $id) {
         $pasiente = Pasiente::find($id);
         $response = null;
-        $user = (object) ['image' => ""];
+        $user = (object) ['imagen' => ""];
         if  (!is_null($pasiente)){
-            if ($request->hasFile('image')) {
-                $original_filename = $request->file('image')->getClientOriginalName();
+            if ($request->hasFile('imagen')) {
+                $original_filename = $request->file('imagen')->getClientOriginalName();
                 $original_filename_arr = explode('.', $original_filename);
                 $file_ext = end($original_filename_arr);
                 $destination_path = './upload/user/';
                 $image = 'U-' . $id . '.' . $file_ext;
-    
-                if ($request->file('image')->move($destination_path, $image)) {
-                    $user->image = '/upload/user/' . $image;
-                   
+                if ($request->file('imagen')->move($destination_path, $image)) {
+                    echo "entro";
+                    $user->image = './upload/user/'.$image;
                     $pasiente->imagen = $image;
-    
                     $pasiente->save();
                 return $this->crearRespuesta('La imagen ha sido subida con éxito', 201);
                 } else {
@@ -62,6 +60,8 @@ class PasienteController extends Controller
     public function store(Request $request) {
         $this->validacion($request);
         Pasiente::create($request->all());
+        $ultimo=DB::getPdo()->lastInsertId();
+        $this->fileUpload($request, $ultimo);
         return $this->crearRespuesta('El elemento ha sido creado', 201);
     }
     public function show($id) {
@@ -123,7 +123,8 @@ class PasienteController extends Controller
         ];
         $this->validate($request, $reglas);
     }
-    public function busqueda($valor){
+    public function busqueda(Request $request){
+        $valor = $request['busqueda'];
         $query = Pasiente::orWhere('nombres', 'LIKE', '%'.$valor.'%')
         ->orWhere('apellidopaterno', 'LIKE', '%'.$valor.'%')
         ->orWhere('apellidomaterno', 'LIKE', '%'.$valor.'%')

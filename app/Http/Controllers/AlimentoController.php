@@ -61,7 +61,8 @@ class AlimentoController extends Controller
         ];
         $this->validate($request, $reglas);
     }
-    public function busqueda($valor){
+    public function busqueda(Request $request){
+        $valor = $request['busqueda'];
         $query = Alimento::orWhere('nombre', 'LIKE', '%'.$valor.'%')->get();
         return $this->crearRespuesta($query, 200);
 

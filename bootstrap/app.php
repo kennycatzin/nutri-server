@@ -38,7 +38,7 @@ class_alias(Barryvdh\DomPDF\Facade::class, 'PDF');
 |
 */
 $app->middleware([
-    //App\Http\Middleware\CORSMiddleware::class
+     App\Http\Middleware\CORSMiddleware::class,
     'CorsMiddleware' => App\Http\Middleware\CORSMiddleware::class,
 ]);
 $app->singleton(

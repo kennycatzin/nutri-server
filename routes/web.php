@@ -38,7 +38,7 @@ $router->group(['prefix' => 'api/alimentos'], function () use ($router) {
     $router->put('{id}', 'AlimentoController@update');
     $router->post('', 'AlimentoController@store');
     $router->delete('{id}', 'AlimentoController@destroy');
-    $router->get('busqueda/{valor}', 'AlimentoController@busqueda');
+    $router->post('busqueda', 'AlimentoController@busqueda');
 });
 $router->group(['prefix' => 'api/ejercicios'], function () use ($router) {
     $router->get('', 'EjercicioController@index');
@@ -47,7 +47,7 @@ $router->group(['prefix' => 'api/ejercicios'], function () use ($router) {
     $router->put('{id}', 'EjercicioController@update');
     $router->post('', 'EjercicioController@store');
     $router->delete('{id}', 'EjercicioController@destroy');
-    $router->get('busqueda/{valor}', 'EjercicioController@busqueda');
+    $router->post('busqueda', 'EjercicioController@busqueda');
 });
 $router->group(['prefix' => 'api/pasientes'], function () use ($router) {
     $router->get('', 'PasienteController@index');
@@ -58,19 +58,19 @@ $router->group(['prefix' => 'api/pasientes'], function () use ($router) {
     $router->post('', 'PasienteController@store');
     $router->post('file/{id}', 'PasienteController@fileUpload');
     $router->delete('{id}', 'PasienteController@destroy');
-    $router->get('busqueda/{valor}', 'PasienteController@busqueda');
+    $router->post('busqueda', 'PasienteController@busqueda');
 });
 $router->group(['prefix' => 'api/clasificaciones'], function () use ($router) {
-    $router->get('', 'clasificacionController@index');
-    $router->get('alimentacion', 'clasificacionController@Alimentacion');
-    $router->get('muscular', 'clasificacionController@Muscular');
-    $router->get('otro', 'clasificacionController@indexOtro');
-    $router->get('{id}', 'clasificacionController@show');
-    $router->post('', 'clasificacionController@store');
-    $router->put('{id}', 'clasificacionController@update');
-    $router->delete('{id}', 'clasificacionController@destroy');
-    $router->get('paginacion/{desde}', 'clasificacionController@paginacion');
-    $router->get('busqueda/{valor}', 'clasificacionController@busqueda');
+    $router->get('', 'ClasificacionController@index');
+    $router->get('alimentacion', 'ClasificacionController@Alimentacion');
+    $router->get('muscular', 'ClasificacionController@Muscular');
+    $router->get('otro', 'ClasificacionController@indexOtro');
+    $router->get('{id}', 'ClasificacionController@show');
+    $router->post('', 'ClasificacionController@store');
+    $router->put('{id}', 'ClasificacionController@update');
+    $router->delete('{id}', 'ClasificacionController@destroy');
+    $router->get('paginacion/{desde}', 'ClasificacionController@paginacion');
+    $router->get('busqueda/{valor}', 'ClasificacionController@busqueda');
 });
 $router->group(['prefix' => 'api/sesiones'], function () use ($router) {
     $router->get('', 'SesionController@sendPDFs');

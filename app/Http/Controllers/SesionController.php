@@ -182,7 +182,7 @@ class SesionController extends Controller
             {
                 $message->from('roly_alme@hotmail.com', 'Laravel');
             
-                $message->to('razonable3500@gmail.com')->cc('razonable3500@gmail.com');
+                $message->to('kenn2506@gmail.com')->cc('kenn2506@gmail.com');
                 $message->attachData($pdf1->output(),'entrenamiento.pdf');
                 $message->attachData($pdf2->output(),'dieta.pdf');
             });
