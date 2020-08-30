@@ -16,8 +16,58 @@ class EjercicioController extends Controller
         
         return $this->crearRespuesta($ejercicio, 200);
     }
+    public function fileUpload(Request $request, $id) {
+        $ejer = Ejercicio::find($id);
+        $response = null;
+        $ejercicio = "";
+        if  (!is_null($ejer)){
+            DB::insert('insert into detalle_imagen_ejercicio
+            (descripcion, url, id_ejercicio) values (?, ?, ?)',
+             ["descripcion", "", $id]);
+             $ultimo=DB::getPdo()->lastInsertId();
+            if ($request->hasFile('imagen')) {
+                $original_filename = $request->file('imagen')->getClientOriginalName();
+                $original_filename_arr = explode('.', $original_filename);
+                $file_ext = end($original_filename_arr);
+                $destination_path = './upload/ejercicio/';
+                $image = 'E-' . $ultimo . '.' . $file_ext;
+                if ($request->file('imagen')->move($destination_path, $image)) {
+                    $ejercicio = './upload/ejercicio/'.$image;
+                  DB::update('update detalle_imagen_ejercicio
+                   set url = ? where id_detalle_imagen_ejercicio = ?',
+                    [$ejercicio, $ultimo]);
+                    return $this->crearRespuesta('La imagen ha sido subida con éxito', 201);
+                } else {
+                    return $this->crearRespuestaError('Ha ocurrido un error con la imagen', 400);
+                }
+            } else {
+                return $this->crearRespuestaError('No existe el archivo', 400);
+            }
+
+        }else{
+            return $this->crearRespuestaError('No existe el usuario', 400);
+        }
+    }
+    public function eliminarImagen($id_detalle){
+        $imagen = DB::table('detalle_imagen_ejercicio')
+        ->select('url')
+        ->where('id_detalle_imagen_ejercicio', $id_detalle)
+        ->first();
+        if(file_exists($imagen->url)) {
+            unlink($imagen->url);
+            DB::delete('delete from detalle_imagen_ejercicio
+             where id_detalle_imagen_ejercicio = ?', [$id_detalle]);
+             return $this->crearRespuesta("Elemento eliminado", 200);
+        }else{
+            return $this->crearRespuestaError("No existe el detalle", 300);
+        }
+    }
     public function store(Request $request) {
         $this->validacion($request);
+        $imagen = $request['imagen'];
+        foreach($imagen as $img){
+            echo "-1-";
+        }
         Ejercicio::create($request->all());
         return $this->crearRespuesta('El elemento ha sido creado', 201);
     }

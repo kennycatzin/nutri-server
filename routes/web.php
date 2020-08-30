@@ -48,6 +48,10 @@ $router->group(['prefix' => 'api/ejercicios'], function () use ($router) {
     $router->post('', 'EjercicioController@store');
     $router->delete('{id}', 'EjercicioController@destroy');
     $router->post('busqueda', 'EjercicioController@busqueda');
+    $router->post('file/{id}', 'EjercicioController@fileUpload');
+    $router->delete('delete-img/{id}', 'EjercicioController@eliminarImagen');
+
+
 });
 $router->group(['prefix' => 'api/pasientes'], function () use ($router) {
     $router->get('', 'PasienteController@index');
@@ -78,6 +82,25 @@ $router->group(['prefix' => 'api/sesiones'], function () use ($router) {
     $router->get('prueba/{sesionId}', 'SesionController@consultaDieta');
     $router->get('entrenamiento/{sesionId}', 'SesionController@consultaEntrenamiento');
     $router->get('email', 'SesionController@update');
+});
+
+$router->group(['prefix' => 'api/recetas'], function () use ($router) {
+  
+    $router->post('store-receta', 'RecetaController@store');
+    $router->delete('delete-detalle/{id_detalle}', 'RecetaController@deleteDetalle');
+    $router->delete('delete-receta/{id}', 'RecetaController@deleteReceta');
+    $router->get('get-receta-paginado/{id}', 'RecetaController@getRecetasPaginado');
+    $router->get('get-receta-clasificacion/{id_clasificacion}/{valor}', 'RecetaController@getRecetasClasificacion');
+    $router->post('busqueda-receta', 'RecetaController@busqueda');
+    $router->get('get-info-receta/{id_receta}', 'RecetaController@getInfoReceta');
+
+    
+
+    
+
+
+
+  
 });
 
 

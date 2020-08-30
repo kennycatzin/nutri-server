@@ -21,7 +21,6 @@ class PasienteController extends Controller
                 $destination_path = './upload/user/';
                 $image = 'U-' . $id . '.' . $file_ext;
                 if ($request->file('imagen')->move($destination_path, $image)) {
-                    echo "entro";
                     $user->image = './upload/user/'.$image;
                     $pasiente->imagen = $image;
                     $pasiente->save();
@@ -43,14 +42,10 @@ class PasienteController extends Controller
         if(!File::exists($path)) {
             return response()->json(['message' => 'Image not found.'], 404);
         }
-    
         $file = File::get($path);
         $type = File::mimeType($path);
-    
         $response = Response::make($file, 200);
         $response->header("Content-Type", $type);
-
-
         return $response;
     }
     public function index() {
