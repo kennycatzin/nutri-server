@@ -137,5 +137,32 @@ class RecetaController extends Controller
     ];
     $this->validate($request, $reglas);
 }
+public function fileUpload(Request $request, $id) {
+    $receta = Receta::find($id);
+    $response = null;
+    $user = (object) ['imagen' => ""];
+    if  (!is_null($receta)){
+        if ($request->hasFile('imagen')) {
+            $original_filename = $request->file('imagen')->getClientOriginalName();
+            $original_filename_arr = explode('.', $original_filename);
+            $file_ext = end($original_filename_arr);
+            $destination_path = './upload/receta/';
+            $image = 'R-' . $id . '.' . $file_ext;
+            if ($request->file('imagen')->move($destination_path, $image)) {
+                $user->image = './upload/receta/'.$image;
+                $receta->imagen = $image;
+                $receta->save();
+            return $this->crearRespuesta('La imagen ha sido subida con éxito', 201);
+            } else {
+                return $this->crearRespuestaError('Ha ocurrido un error con la imagen', 400);
+            }
+        } else {
+            return $this->crearRespuestaError('No existe el archivo', 400);
+        }
+
+    }else{
+        return $this->crearRespuestaError('No existe el usuario', 400);
+    }
+}
 }
  

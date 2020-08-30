@@ -18,10 +18,10 @@ class PasienteController extends Controller
                 $original_filename = $request->file('imagen')->getClientOriginalName();
                 $original_filename_arr = explode('.', $original_filename);
                 $file_ext = end($original_filename_arr);
-                $destination_path = './upload/user/';
-                $image = 'U-' . $id . '.' . $file_ext;
+                $destination_path = './upload/pasiente/';
+                $image = 'P-' . $id . '.' . $file_ext;
                 if ($request->file('imagen')->move($destination_path, $image)) {
-                    $user->image = './upload/user/'.$image;
+                    $user->image = './upload/pasiente/'.$image;
                     $pasiente->imagen = $image;
                     $pasiente->save();
                 return $this->crearRespuesta('La imagen ha sido subida con éxito', 201);

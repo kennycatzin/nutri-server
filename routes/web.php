@@ -93,6 +93,8 @@ $router->group(['prefix' => 'api/recetas'], function () use ($router) {
     $router->get('get-receta-clasificacion/{id_clasificacion}/{valor}', 'RecetaController@getRecetasClasificacion');
     $router->post('busqueda-receta', 'RecetaController@busqueda');
     $router->get('get-info-receta/{id_receta}', 'RecetaController@getInfoReceta');
+    $router->post('fileUpload/{id}', 'RecetaController@fileUpload');
+
 
     
 
