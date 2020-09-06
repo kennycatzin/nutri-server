@@ -35,6 +35,7 @@ $router->group(['prefix' => 'api/alimentos'], function () use ($router) {
     $router->get('', 'AlimentoController@index');
     $router->get('{id}', 'AlimentoController@show');
     $router->get('paginacion/{desde}', 'AlimentoController@paginacion');
+    $router->get('get-clasificacion/{id}', 'AlimentoController@getClasificacion');
     $router->put('{id}', 'AlimentoController@update');
     $router->post('', 'AlimentoController@store');
     $router->delete('{id}', 'AlimentoController@destroy');
@@ -68,6 +69,7 @@ $router->group(['prefix' => 'api/clasificaciones'], function () use ($router) {
     $router->get('', 'ClasificacionController@index');
     $router->get('alimentacion', 'ClasificacionController@Alimentacion');
     $router->get('muscular', 'ClasificacionController@Muscular');
+    $router->get('receta', 'ClasificacionController@receta');
     $router->get('otro', 'ClasificacionController@indexOtro');
     $router->get('{id}', 'ClasificacionController@show');
     $router->post('', 'ClasificacionController@store');
@@ -94,16 +96,10 @@ $router->group(['prefix' => 'api/recetas'], function () use ($router) {
     $router->post('busqueda-receta', 'RecetaController@busqueda');
     $router->get('get-info-receta/{id_receta}', 'RecetaController@getInfoReceta');
     $router->post('fileUpload/{id}', 'RecetaController@fileUpload');
-
-
-    
-
-    
-
-
-
-  
 });
+$router->group(['prefix' => 'api/unidades'], function () use ($router) {
 
+    $router->get('get-unidades', 'UnidadController@getElementos');
+});
 
 

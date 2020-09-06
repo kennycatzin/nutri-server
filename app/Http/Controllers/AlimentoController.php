@@ -76,7 +76,10 @@ class AlimentoController extends Controller
         }
         $query = DB::table('alimentos')->skip($desde)->take($hasta)->get();
         return $this->crearRespuesta($query, 200);
-
+    }
+    public function getClasificacion($id){
+        $data = Alimento::where('clasificacion_id', $id)->get();
+        return $this->crearRespuesta($data, 200);
     }
 }
  

@@ -19,6 +19,12 @@ class ClasificacionController extends Controller
 
         return response()->json(['data' => $clasificacion], 200);
     }
+    public function receta() {
+
+        $clasificacion=Clasificacion::where('tipo', 'RECETA')->get();
+        return  $this->crearRespuesta($clasificacion, 200);
+        return response()->json(['data' => $clasificacion], 200);
+    }
     public function indexOtro() {
         $clasificacion=Clasificacion::all()->where('tipo', 'otro');
         return $this->crearRespuesta($clasificacion, 200);
