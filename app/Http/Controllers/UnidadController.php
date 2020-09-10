@@ -12,5 +12,9 @@ class UnidadController extends Controller
       $data = UnidadMedida::orderBy('nombre')->get();
       return $this->crearRespuesta($data, 200);
   }
+  public function getById($id){
+    $data = UnidadMedida::where('id', $id)->get();
+    return $this->crearRespuesta($data, 200);
+}
 }
  

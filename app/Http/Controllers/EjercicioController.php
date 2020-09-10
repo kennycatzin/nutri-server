@@ -64,10 +64,6 @@ class EjercicioController extends Controller
     }
     public function store(Request $request) {
         $this->validacion($request);
-        $imagen = $request['imagen'];
-        foreach($imagen as $img){
-            echo "-1-";
-        }
         Ejercicio::create($request->all());
         return $this->crearRespuesta('El elemento ha sido creado', 201);
     }

@@ -32,12 +32,15 @@ class AlimentoController extends Controller
             $grasas = $request->get('grasas');
             $carbohidratos = $request->get('carbohidratos');
             $clasificacion_id = $request->get('clasificacion_id');
+            $calorias= $request->get('calorias');
 
             $alimento->nombre = $nombre;
             $alimento->proteinas = $proteinas;
             $alimento->grasas = $grasas;
             $alimento->carbohidratos = $carbohidratos;
             $alimento->clasificacion_id = $clasificacion_id;
+            $alimento->calorias = $calorias;
+
 
             $alimento->save();
             return $this->crearRespuesta('El alimento ha sido modificado', 201);

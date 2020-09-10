@@ -10,7 +10,7 @@ class Alimento extends Model
     protected $table = 'alimentos';
 
     protected $fillable = [
-        'id', 'nombre', 'clasificacion_id', 'proteinas', 'grasas', 'carbohidratos'
+        'id', 'nombre', 'clasificacion_id', 'proteinas', 'grasas', 'carbohidratos', 'calorias'
     ];
 
     public function clasificaciones()

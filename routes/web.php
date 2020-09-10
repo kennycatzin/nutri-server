@@ -100,6 +100,8 @@ $router->group(['prefix' => 'api/recetas'], function () use ($router) {
 $router->group(['prefix' => 'api/unidades'], function () use ($router) {
 
     $router->get('get-unidades', 'UnidadController@getElementos');
+    $router->get('get-byid/{id}', 'UnidadController@getById');
+
 });
 
 

@@ -10,7 +10,9 @@ class Sesion extends Model
     protected $table = 'sesiones';
 
     protected $fillable = [
-        'id', 'sesion', 'imc', 'peso', 'pctgrasa'
+        'id', 'sesion', 'imc', 'peso', 'pctgrasa', 'masa_muscular', 
+        'metabolismo_basal', 'gasto_calorico_total', 'frecuencia_cardiaca',
+        'tipo_cuerpo', 'kg_peso'
     ];
 
     

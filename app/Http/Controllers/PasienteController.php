@@ -60,7 +60,19 @@ class PasienteController extends Controller
         return $this->crearRespuesta('El elemento ha sido creado', 201);
     }
     public function show($id) {
-        $pasiente = Pasiente::find($id);
+        $pasiente = DB::table('pasientes')
+        ->select(DB::raw('concat(nombres, " ", apellidopaterno, " ", apellidomaterno) as nombres'),
+        'correo', 'objetivo', 'fechanacimiento', 'estatura', 'genero')
+        ->where('id', $id)
+        ->get();
+        $historial = DB::table('sesiones')
+        ->select('id', 'imc', 'peso', 'pctgrasa', 'masa_muscular', 'metabolismo_basal', 'created_at as fecha')
+        ->where('paciente_id', $id)
+        ->orderBy('created_at', 'DESC')
+        ->take(10)
+        ->get();
+        $pasiente=json_decode(json_encode($pasiente), true);
+        $pasiente[0]+=["historial"=>$historial];
         if($pasiente){
             return $this->crearRespuesta($pasiente, 200);
         }

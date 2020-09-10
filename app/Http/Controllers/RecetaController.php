@@ -26,9 +26,11 @@ class RecetaController extends Controller
                 $tiempo_preparacion = $request->get('tiempo_preparacion');
                 $total_calorias = $request->get('total_calorias');
                 $pasos = $request->get('pasos');
+                $clasificacion_id= $request->get('clasificacion_id');
 
                 $receta->nombre = $nombre;
                 $receta->dificultad = $dificultad;
+                $receta->clasificacion_id = $clasificacion_id;
                 $receta->tiempo_coccion = $tiempo_coccion;
                 $receta->tiempo_preparacion = $tiempo_preparacion;
                 $receta->total_calorias = $total_calorias;
@@ -81,6 +83,7 @@ class RecetaController extends Controller
     ->select('recetas.*', 'clasificaciones.nombre AS clasificacion')
     ->skip($desde)
     ->take($hasta)
+    ->orderBy('recetas.nombre', 'ASC')
     ->get();
     return $this->crearRespuesta($data, 200);
    }
@@ -118,13 +121,14 @@ class RecetaController extends Controller
 
     $alimentos=DB::table('alimento_receta')
     ->join('recetas', 'recetas.id', '=', 'alimento_receta.receta_id')
+    ->join('unidad_medida', 'unidad_medida.id', '=', 'alimento_receta.unidad_id')
     ->join('alimentos', 'alimentos.id', '=', 'alimento_receta.alimento_id')
-    ->select('alimento_receta.id', 'alimentos.nombre as alimento', 'alimento_receta.cantidad', 'alimento_receta.calorias')
+    ->select('alimento_receta.id', 'alimentos.nombre as alimento', 'unidad_medida.nombre as unidad', 'alimento_receta.cantidad', 'alimento_receta.calorias')
     ->where('alimento_receta.receta_id', $id_receta)
     ->get();
 
     $data=json_decode(json_encode($data), true);
-    $data[0]+=["alimento"=>$alimentos];
+    $data[0]+=["alimentos"=>$alimentos];
     return $this->crearRespuesta($data, 200);
 
    }
