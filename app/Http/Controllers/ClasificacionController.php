@@ -42,7 +42,7 @@ class ClasificacionController extends Controller
     public function show($id) {
         $clasificacion = Clasificacion::find($id);
         if($clasificacion){
-            return $this->crearRespuesta($alimento, 200);
+            return $this->crearRespuesta($clasificacion, 200);
         }
         return $this->crearRespuestaError('No existe el id', 300);      
     }

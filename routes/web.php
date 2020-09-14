@@ -51,7 +51,9 @@ $router->group(['prefix' => 'api/ejercicios'], function () use ($router) {
     $router->post('busqueda', 'EjercicioController@busqueda');
     $router->post('file/{id}', 'EjercicioController@fileUpload');
     $router->delete('delete-img/{id}', 'EjercicioController@eliminarImagen');
+    $router->get('get-ejercicio-clasificado/{clasificacion_id}', 'EjercicioController@getEjercicioClasificado');
 
+    
 
 });
 $router->group(['prefix' => 'api/pasientes'], function () use ($router) {

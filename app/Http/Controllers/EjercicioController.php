@@ -80,11 +80,13 @@ class EjercicioController extends Controller
             $this->validacion($request);
             $nombre = $request->get('nombre');
             $imagen = $request->get('imagen');
+            $descripcion = $request->get('descripcion');
             $clasificacion_id = $request->get('clasificacion_id');
 
             
             $ejercicio->nombre = $nombre;
             $ejercicio->imagen = $imagen;
+            $ejercicio->descripcion = $descripcion;
             $ejercicio->clasificacion_id = $clasificacion_id;
           
 
@@ -134,6 +136,10 @@ class EjercicioController extends Controller
         ->get();
         return $this->crearRespuesta($query, 200);
 
+    }
+    public function getEjercicioClasificado($clasificacion_id){
+        $data = Ejercicio::where('clasificacion_id', $clasificacion_id)->get();
+        return $this->crearRespuesta($data, 200);
     }
 }
 
