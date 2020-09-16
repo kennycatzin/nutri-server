@@ -81,7 +81,7 @@ class PasienteController extends Controller
     public function update(Request $request, $id) {
         $pasiente = Pasiente::find($id);
         if  (!is_null($pasiente)){
-            $this->validacion($request);
+            // $this->validacion($request);
             $nombres = $request->get('nombres');
             $apellidopaterno = $request->get('apellidopaterno');
             $apellidomaterno = $request->get('apellidomaterno');

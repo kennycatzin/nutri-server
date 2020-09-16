@@ -14,7 +14,10 @@ class SesionController extends Controller
         $sesion=Sesion::all();
         return $this->crearRespuesta($sesion, 200);
     }
-    public function store(Request $request, $id) {
+    public function store(Request $request) {
+        try {
+            //code...
+        
         $json = json_encode($request->input());
         $ojso = json_decode($json, true);
       // Analsis clinico
@@ -207,8 +210,11 @@ class SesionController extends Controller
             }
         }
        
-        return $this->crearRespuesta('El elemento ha sido creado'. $id, 201);
+        return $this->crearRespuesta('El elemento ha sido creado', 201);
+    } catch (\Throwable $th) {
+        return $this->crearRespuestaError('Ha ocurrido un error interno'. $th, 500);
     }
+}
     public function consultaDieta($sesionId) {
         $query = DB::table('sesiones')
             ->join('dietas', 'dietas.sesion_id', '=', 'sesiones.id')
