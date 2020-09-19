@@ -81,11 +81,16 @@ $router->group(['prefix' => 'api/clasificaciones'], function () use ($router) {
     $router->get('busqueda/{valor}', 'ClasificacionController@busqueda');
 });
 $router->group(['prefix' => 'api/sesiones'], function () use ($router) {
-    $router->get('', 'SesionController@sendPDFs');
+    $router->get('send-pdf/{sesion}', 'SesionController@sendPDFs');
     $router->post('', 'SesionController@store');
     $router->get('prueba/{sesionId}', 'SesionController@consultaDieta');
     $router->get('entrenamiento/{sesionId}', 'SesionController@consultaEntrenamiento');
+    $router->get('dieta/{sesionId}', 'SesionController@consultaDieta');
+
     $router->get('email', 'SesionController@update');
+
+    $router->get('get-sesion/{id}', 'SesionController@getSesion');
+
 });
 
 $router->group(['prefix' => 'api/recetas'], function () use ($router) {

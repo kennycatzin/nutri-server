@@ -10,7 +10,7 @@ class Entramiento extends Model
     protected $table = 'entrenamientos';
 
     protected $fillable = [
-        'sesion_id', 'notas', 'dias'
+        'sesion_id', 'descripcion', 'dias'
     ];
 
     public function clasificacion()
