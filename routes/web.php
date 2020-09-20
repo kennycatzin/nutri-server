@@ -68,7 +68,7 @@ $router->group(['prefix' => 'api/pasientes'], function () use ($router) {
     $router->post('busqueda', 'PasienteController@busqueda');
 });
 $router->group(['prefix' => 'api/clasificaciones'], function () use ($router) {
-    $router->get('', 'ClasificacionController@index');
+    $router->get('paginacion/{desde}', 'ClasificacionController@index');
     $router->get('alimentacion', 'ClasificacionController@Alimentacion');
     $router->get('muscular', 'ClasificacionController@Muscular');
     $router->get('receta', 'ClasificacionController@receta');
@@ -78,7 +78,7 @@ $router->group(['prefix' => 'api/clasificaciones'], function () use ($router) {
     $router->put('{id}', 'ClasificacionController@update');
     $router->delete('{id}', 'ClasificacionController@destroy');
     $router->get('paginacion/{desde}', 'ClasificacionController@paginacion');
-    $router->get('busqueda/{valor}', 'ClasificacionController@busqueda');
+    $router->post('busqueda', 'ClasificacionController@busqueda');
 });
 $router->group(['prefix' => 'api/sesiones'], function () use ($router) {
     $router->get('send-pdf/{sesion}', 'SesionController@sendPDFs');

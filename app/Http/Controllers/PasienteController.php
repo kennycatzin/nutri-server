@@ -146,7 +146,7 @@ class PasienteController extends Controller
             $desde+=$valor;
             $hasta+=$valor;
         }
-        $query = DB::table('pasientes')->skip($desde)->take($hasta)->get();
+        $query = DB::table('pasientes')->skip($desde)->take(6)->get();
         return $this->crearRespuesta($query, 200);
 
     }

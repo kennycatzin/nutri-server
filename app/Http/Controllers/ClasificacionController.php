@@ -8,7 +8,10 @@ use Illuminate\Support\Facades\DB;
 class ClasificacionController extends Controller
 {
     public function muscular() {
-        $clasificacion=Clasificacion::all()->where('tipo', 'MUSCULAR');
+        $clasificacion=DB::table('clasificaciones')
+        ->select('id', 'nombre', 'tipo')
+        ->where('tipo', 'MUSCULAR')
+        ->get();
         return  $this->crearRespuesta($clasificacion, 200);
     }
     public function alimentacion() {
@@ -30,8 +33,14 @@ class ClasificacionController extends Controller
         return $this->crearRespuesta($clasificacion, 200);
     }
 
-    public function index() {
-        $clasificacion=Clasificacion::all();
+    public function index($valor) {
+        $desde=0;
+        $hasta=6;
+        if($valor>0){
+            $desde+=$valor;
+            $hasta+=$valor;
+        }
+        $clasificacion = DB::table('clasificaciones')->skip($desde)->take(6)->get();
         return $this->crearRespuesta($clasificacion, 200);
     }
     public function store(Request $request) {
@@ -86,10 +95,12 @@ class ClasificacionController extends Controller
             $desde+=$valor;
             $hasta+=$valor;
         }
-        $query = DB::table('clasificaciones')->skip($desde)->take($hasta)->get();
+        $query = DB::table('clasificaciones')->skip($desde)->take(6)->get();
         return $this->crearRespuesta($query, 200);
     }
-    public function busqueda($valor){
+    public function busqueda(Request $request){
+
+        $valor = $request['busqueda'];
         $query = Clasificacion::orWhere('nombre', 'LIKE', '%'.$valor.'%')->get();
         return $this->crearRespuesta($query, 200);
 

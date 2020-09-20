@@ -10,7 +10,7 @@
  * {
     margin: 0;
     padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family:  -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .titulo {
@@ -157,7 +157,7 @@ ul {
 
 #contNotas {
     width: 100%;
-    height: 150px;
+    height: 70px;
     border-radius: 10px;
     padding: 10px;
     background-color: rgb(128, 128, 128, .50);
@@ -167,7 +167,7 @@ ul {
     padding: 1.8px;
     margin-left: 8px;
     background-color: rgb(128, 128, 128, .30);
-    font-size: 13px;
+    font-size: 7px;
     border-radius: 10px;
 }
 .bg-azul {
@@ -179,6 +179,10 @@ ul {
 }
 .taman {
     font-size: 15px;
+}
+.detalle{
+    font-size: 10px;
+    color: #292b2c;
 }
     </style>
 </head>
@@ -195,7 +199,7 @@ ul {
     <p>Cel: (999) 2 42 12 49 / e-mail: roly_alme@hotmail.com</p>
     </div>
     <table>
-        <tr>
+        <tr style="font-size: 14px;">
             <td style="border:none; width: 45%;">
                 <ul>
                     <li>Fecha: </li>
@@ -222,20 +226,20 @@ ul {
     @foreach ($data['entrenamiento'] as $entrenamiento)   
     <table class="bg-azul" cellspacing="0" cellpadding="0" border="0" style="border:none;">
         <tr class="taman">
-            <td COLSPAN=2 style="width: 19%; border:none; padding-top: 0;">
+            <td COLSPAN=2 style="font-size: 14px; width: 19%; border:none; padding-top: 0;">
                 {{ $entrenamiento['dias'] }}
             </td>
-            <td style="border:none; padding-top: 0;">
+            <td style="font-size: 13px; border:none; padding-top: 0;">
                 ({{ $entrenamiento['descripcion'] }})
             </td>
         </tr>
         {{-- REPITE --}}
         @foreach ($entrenamiento['programa'] as $programa)
         <tr >
-            <td class="taman" style="width: 19%; border:none; padding-top: 0; vertical-align:text-top;">
+            <td class="taman" style="font-size: 11px; width: 19%; border:none; padding-top: 0; vertical-align:text-top;">
                 {{ $programa['nombre'] }}
             </td>
-            <td  class="taman" style="width: 24%; border:none; padding-top: 0; vertical-align:text-top;" ">
+            <td  class="taman" style="font-size: 11px; width: 24%; border:none; padding-top: 0; vertical-align:text-top;" ">
                 <ul>
                     <li>{{ $programa['repeticiones'] }} X {{ $programa['vueltas'] }}</li>
                     <li>{{ $programa['descanso'] }} s. descanso</li>
@@ -245,7 +249,11 @@ ul {
                 <ul>
                      {{-- REPITE --}}
                      @foreach (json_decode($programa['det_programa'], true) as $det)
-                    <li>- {{ $det['ejercicio'] }} <span class="musculo ">{{ $det['musculo'] }}</span> </li>
+                    <li>
+                        <p class="detalle" style="font-size: 10px;">
+                            - {{ $det['ejercicio'] }} <span class="musculo" style="font-size: 8px; border-radius: 10px;">{{ $det['musculo'] }}</span>
+                        </p>
+                    </li>
                     @endforeach     
                 </ul>
             </td>
@@ -256,7 +264,7 @@ ul {
     <div class="notas">
         <h4>Observaciones</h4>
         <div id="contNotas">
-            <p>
+            <p style="font-size: 14px;">
                 {{$data['notas_entrenamiento']}}
             </p>
         </div>

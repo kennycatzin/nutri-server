@@ -1,219 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
 
-
-
- 
-<!DOCTYPE html>    
-<html>    
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../storage/fonts/Spartan.ttf">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <style>
+        * {
+    font-family: fantasy;
+}
 
-<title>Push Email</title>
-<link rel="shortcut icon" href="favicon.ico">
+.black {
+    background-color: #292b2c;
+}
+ img {
+    position: absolute;
+    top: 0;
 
-<style type="text/css">
-table[name="blk_permission"], table[name="blk_footer"] {display:none;} 
-</style>
+}
+.container {
+    background-color: white;
+    width: 840px;
+    height: auto;
+    margin: auto;
+}
 
-<meta name="googlebot" content="noindex" />
-<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW"/><link rel="stylesheet" href="/style/dhtmlwindow.css" type="text/css" />
-<script type="text/javascript" src="/script/dhtmlwindow.js">
-/***********************************************
-* DHTML Window Widget- © Dynamic Drive (www.dynamicdrive.com)
-* This notice must stay intact for legal use.
-* Visit www.dynamicdrive.com for full source code
-***********************************************/
-</script>
-<link rel="stylesheet" href="/style/modal.css" type="text/css" />
-<script type="text/javascript" src="/script/modal.js"></script>
-<script type="text/javascript">
-	function show_popup(popup_name,popup_url,popup_title,width,height) {var widthpx = width +  "px";var heightpx = height +  "px";emailwindow = dhtmlmodal.open(popup_name , 'iframe', popup_url , popup_title , 'width=' + widthpx + ',height='+ heightpx + ',center=1,resize=0,scrolling=1');}
- function show_modal(popup_name,popup_url,popup_title,width,height){var widthpx = width +  "px";var heightpx = height +  "px";emailwindow = dhtmlmodal.open(popup_name , 'iframe', popup_url , popup_title , 'width=' + widthpx + ',height='+ heightpx + ',modal=1,center=1,resize=0,scrolling=1');}
-var popUpWin=0;
-	function popUpWindow(URLStr,PopUpName, width, height){if(popUpWin) { if(!popUpWin.closed) popUpWin.close();}var left = (screen.width - width) / 2;var top = (screen.height - height) / 2;popUpWin = open(URLStr, PopUpName,	'toolbar=0,location=0,directories=0,status=0,menub	ar=0,scrollbar=0,resizable=0,copyhistory=yes,width='+width+',height='+height+',left='+left+', 	top='+top+',screenX='+left+',screenY='+top+'');}
-</script>
-    
-<meta content="width=device-width, initial-scale=1.0" name="viewport">    
-<style type="text/css">    
-/*** BMEMBF Start ***/    
-[name=bmeMainBody]{min-height:1000px;}    
-@media only screen and (max-width: 480px){table.blk, table.tblText, .bmeHolder, .bmeHolder1, table.bmeMainColumn{width:100% !important;} }        
-@media only screen and (max-width: 480px){.bmeImageCard table.bmeCaptionTable td.tblCell{padding:0px 20px 20px 20px !important;} }        
-@media only screen and (max-width: 480px){.bmeImageCard table.bmeCaptionTable.bmeCaptionTableMobileTop td.tblCell{padding:20px 20px 0 20px !important;} }        
-@media only screen and (max-width: 480px){table.bmeCaptionTable td.tblCell{padding:10px !important;} }        
-@media only screen and (max-width: 480px){table.tblGtr{ padding-bottom:20px !important;} }        
-@media only screen and (max-width: 480px){td.blk_container, .blk_parent, .bmeLeftColumn, .bmeRightColumn, .bmeColumn1, .bmeColumn2, .bmeColumn3, .bmeBody{display:table !important;max-width:600px !important;width:100% !important;} }        
-@media only screen and (max-width: 480px){table.container-table, .bmeheadertext, .container-table { width: 95% !important; } }        
-@media only screen and (max-width: 480px){.mobile-footer, .mobile-footer a{ font-size: 13px !important; line-height: 18px !important; } .mobile-footer{ text-align: center !important; } table.share-tbl { padding-bottom: 15px; width: 100% !important; } table.share-tbl td { display: block !important; text-align: center !important; width: 100% !important; } }        
-@media only screen and (max-width: 480px){td.bmeShareTD, td.bmeSocialTD{width: 100% !important; } }        
-@media only screen and (max-width: 480px){td.tdBoxedTextBorder{width: auto !important;}}    
-@media only screen and (max-width: 480px){table.blk, table[name=tblText], .bmeHolder, .bmeHolder1, table[name=bmeMainColumn]{width:100% !important;} }    
-@media only screen and (max-width: 480px){.bmeImageCard table.bmeCaptionTable td[name=tblCell]{padding:0px 20px 20px 20px !important;} }    
-@media only screen and (max-width: 480px){.bmeImageCard table.bmeCaptionTable.bmeCaptionTableMobileTop td[name=tblCell]{padding:20px 20px 0 20px !important;} }    
-@media only screen and (max-width: 480px){table.bmeCaptionTable td[name=tblCell]{padding:10px !important;} }    
-@media only screen and (max-width: 480px){table[name=tblGtr]{ padding-bottom:20px !important;} }    
-@media only screen and (max-width: 480px){td.blk_container, .blk_parent, [name=bmeLeftColumn], [name=bmeRightColumn], [name=bmeColumn1], [name=bmeColumn2], [name=bmeColumn3], [name=bmeBody]{display:table !important;max-width:600px !important;width:100% !important;} }    
-@media only screen and (max-width: 480px){table[class=container-table], .bmeheadertext, .container-table { width: 95% !important; } }    
-@media only screen and (max-width: 480px){.mobile-footer, .mobile-footer a{ font-size: 13px !important; line-height: 18px !important; } .mobile-footer{ text-align: center !important; } table[class="share-tbl"] { padding-bottom: 15px; width: 100% !important; } table[class="share-tbl"] td { display: block !important; text-align: center !important; width: 100% !important; } }    
-@media only screen and (max-width: 480px){td[name=bmeShareTD], td[name=bmeSocialTD]{width: 100% !important; } }    
-@media only screen and (max-width: 480px){td[name=tdBoxedTextBorder]{width: auto !important;}}    
-@media only screen and (max-width: 480px){.bmeImageCard table.bmeImageTable{height: auto !important; width:100% !important; padding:20px !important;clear:both; float:left !important; border-collapse: separate;} }    
-@media only screen and (max-width: 480px){.bmeMblInline table.bmeImageTable{height: auto !important; width:100% !important; padding:10px !important;clear:both;} }    
-@media only screen and (max-width: 480px){.bmeMblInline table.bmeCaptionTable{width:100% !important; clear:both;} }    
-@media only screen and (max-width: 480px){table.bmeImageTable{height: auto !important; width:100% !important; padding:10px !important;clear:both; } }    
-@media only screen and (max-width: 480px){table.bmeCaptionTable{width:100% !important;  clear:both;} }    
-@media only screen and (max-width: 480px){table.bmeImageContainer{width:100% !important; clear:both; float:left !important;} }    
-@media only screen and (max-width: 480px){table.bmeImageTable td{padding:0px !important; height: auto; } }    
-@media only screen and (max-width: 480px){td.bmeImageContainerRow{padding:0px !important;}}    
-@media only screen and (max-width: 480px){img.mobile-img-large{width:100% !important; height:auto !important;} }    
-@media only screen and (max-width: 480px){img.bmeRSSImage{max-width:320px; height:auto !important;}}    
-@media only screen and (min-width: 640px){img.bmeRSSImage{max-width:600px !important; height:auto !important;} }    
-@media only screen and (max-width: 480px){.trMargin img{height:10px;} }    
-@media only screen and (max-width: 480px){div.bmefooter, div.bmeheader{ display:block !important;} }    
-@media only screen and (max-width: 480px){.tdPart{ width:100% !important; clear:both; float:left !important; } }    
-@media only screen and (max-width: 480px){table.blk_parent1, table.tblPart {width: 100% !important; } }    
-@media only screen and (max-width: 480px){.tblLine{min-width: 100% !important;}}     
-@media only screen and (max-width: 480px){.bmeMblCenter img { margin: 0 auto; } }       
-@media only screen and (max-width: 480px){.bmeMblCenter, .bmeMblCenter div, .bmeMblCenter span  { text-align: center !important; text-align: -webkit-center !important; } }    
-@media only screen and (max-width: 480px){.bmeNoBr br, .bmeImageGutterRow, .bmeMblStackCenter .bmeShareItem .tdMblHide { display: none !important; } }    
-@media only screen and (max-width: 480px){.bmeMblInline table.bmeImageTable, .bmeMblInline table.bmeCaptionTable, td.bmeMblInline { clear: none !important; width:50% !important; } }    
-@media only screen and (max-width: 480px){.bmeMblInlineHide, .bmeShareItem .trMargin { display: none !important; } }    
-@media only screen and (max-width: 480px){.bmeMblInline table.bmeImageTable img, .bmeMblShareCenter.tblContainer.mblSocialContain, .bmeMblFollowCenter.tblContainer.mblSocialContain{width: 100% !important; } }    
-@media only screen and (max-width: 480px){.bmeMblStack> .bmeShareItem{width: 100% !important; clear: both !important;} }    
-@media only screen and (max-width: 480px){.bmeShareItem{padding-top: 10px !important;} }    
-@media only screen and (max-width: 480px){.tdPart.bmeMblStackCenter, .bmeMblStackCenter .bmeFollowItemIcon {padding:0px !important; text-align: center !important;} }    
-@media only screen and (max-width: 480px){.bmeMblStackCenter> .bmeShareItem{width: 100% !important;} }    
-@media only screen and (max-width: 480px){ td.bmeMblCenter {border: 0 none transparent !important;}}    
-@media only screen and (max-width: 480px){.bmeLinkTable.tdPart td{padding-left:0px !important; padding-right:0px !important; border:0px none transparent !important;padding-bottom:15px !important;height: auto !important;}}    
-@media only screen and (max-width: 480px){.tdMblHide{width:10px !important;} }    
-@media only screen and (max-width: 480px){.bmeShareItemBtn{display:table !important;}}    
-@media only screen and (max-width: 480px){.bmeMblStack td {text-align: left !important;}}    
-@media only screen and (max-width: 480px){.bmeMblStack .bmeFollowItem{clear:both !important; padding-top: 10px !important;}}    
-@media only screen and (max-width: 480px){.bmeMblStackCenter .bmeFollowItemText{padding-left: 5px !important;}}    
-@media only screen and (max-width: 480px){.bmeMblStackCenter .bmeFollowItem{clear:both !important;align-self:center; float:none !important; padding-top:10px;margin: 0 auto;}}    
-@media only screen and (max-width: 480px){    
-.tdPart> table{width:100% !important;}    
-}    
-@media only screen and (max-width: 480px){.tdPart>table.bmeLinkContainer{ width:auto !important; }}    
-@media only screen and (max-width: 480px){.tdPart.mblStackCenter>table.bmeLinkContainer{ width:100% !important;}}     
-.blk_parent:first-child, .blk_parent{float:left;}    
-.blk_parent:last-child{float:right;}    
-/*** BMEMBF END ***/    
-    
-table[name="bmeMainBody"], body {background-color:#292b2c;}    
- td[name="bmePreHeader"] {background-color:transparent;}    
- td[name="bmeHeader"] {background:#ffffff;background-color:#292b2c;}    
- td[name="bmeBody"], table[name="bmeBody"] {background-color:#ffffff;}    
- td[name="bmePreFooter"] {background-color:#ffffff;}    
- td[name="bmeFooter"] {background-color:transparent;}    
- td[name="tblCell"], .blk {font-family:initial;font-weight:normal;font-size:initial;}    
- table[name="blk_blank"] td[name="tblCell"] {font-family:Arial, Helvetica, sans-serif;font-size:14px;}    
- [name=bmeMainContentParent] {border-color:#666666;border-width:0px;border-style:none;border-radius:0px;border-collapse:separate;border-spacing:0px;overflow:hidden;}    
- [name=bmeMainColumnParent] {border-color:transparent;border-width:0px;border-style:none;border-radius:0px;}    
- [name=bmeMainColumn] {border-color:transparent;border-width:0px;border-style:none;border-radius:0px;border-collapse:separate;border-spacing:0px;}    
- [name=bmeMainContent] {border-color:transparent;border-width:0px;border-style:none;border-radius:0px;border-collapse:separate;border-spacing:0px;}    
-    
-</style>    
-</head>    
-<body marginheight=0 marginwidth=0 topmargin=0 leftmargin=0 style="height: 100% !important; margin: 0; padding: 0; width: 100% !important;min-width: 100%;">    
-    
-<table width="100%" cellspacing="0" cellpadding="0" border="0" name="bmeMainBody" style="background-color: rgb(0, 0, 0);" bgcolor="#292b2c"><tbody><tr><td width="100%" valign="top" align="center">    
-<table cellspacing="0" cellpadding="0" border="0" name="bmeMainColumnParentTable"><tbody><tr><td name="bmeMainColumnParent" style="border: 0px none transparent; border-radius: 0px; border-collapse: separate;">     
-<table name="bmeMainColumn" class="bmeHolder bmeMainColumn" style="max-width: 600px; overflow: visible; border-radius: 0px; border-collapse: separate; border-spacing: 0px;" cellspacing="0" cellpadding="0" border="0" align="center">    <tbody><tr><td width="100%" class="blk_container bmeHolder" name="bmePreHeader" valign="top" align="center" style="color: rgb(102, 102, 102); border: 0px none transparent;" bgcolor=""></td></tr> <tr><td width="100%" class="bmeHolder" valign="top" align="center" name="bmeMainContentParent" style="border: 0px none rgb(102, 102, 102); border-radius: 0px; border-collapse: separate; border-spacing: 0px; overflow: hidden;">     
-<table name="bmeMainContent" style="border-radius: 0px; border-collapse: separate; border-spacing: 0px; border: 0px none transparent;" width="100%" cellspacing="0" cellpadding="0" border="0" align="center"> <tbody><tr><td width="100%" class="blk_container bmeHolder" name="bmeHeader" valign="top" align="center" style="color: rgb(56, 56, 56); border: 0px none transparent; background-color: rgb(0, 0, 0);" bgcolor="#292b2c"><div id="dv_1" class="blk_wrapper" style="">    
-<table width="600" cellspacing="0" cellpadding="0" border="0" class="blk" name="blk_text"><tbody><tr><td>    
-<table cellpadding="0" cellspacing="0" border="0" width="100%" class="bmeContainerRow"><tbody><tr><td class="tdPart" valign="top" align="center">    
-<table cellspacing="0" cellpadding="0" border="0" width="600" name="tblText" style="float:left; background-color:transparent;" align="left" class="tblText"><tbody><tr><td valign="top" align="left" name="tblCell" style="padding: 20px; font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: 400; color: rgb(56, 56, 56); text-align: left;" class="tblCell"><div style="line-height: 150%; text-align: center;"><span style="font-size: 12px; font-family: Helvetica, Arial, sans-serif; color: #939393; line-height: 150%;"> Fitness & </span><span style="font-size: 12px; font-family: Helvetica, Arial, sans-serif; color: #d63c3c; line-height: 150%;"><strong>Shape</strong></span></div></td></tr></tbody>    
-</table></td></tr></tbody>    
-</table></td></tr></tbody>    
-</table></div>
-</td></tr> <tr><td width="100%" class="blk_container bmeHolder bmeBody" name="bmeBody" valign="top" align="center" style="color: rgb(56, 56, 56); border: 0px none transparent; background-color: rgb(255, 255, 255);" bgcolor="#ffffff"><div id="dv_11" class="blk_wrapper" style="">    
-<table width="600" cellspacing="0" cellpadding="0" border="0" class="blk" name="blk_divider" style=""><tbody><tr><td class="tblCellMain" style="padding: 10px 20px;">    
-<table class="tblLine" cellspacing="0" cellpadding="0" border="0" width="100%" style="border-top-width: 0px; border-top-style: none; min-width: 1px;"><tbody><tr><td><span></span></td></tr></tbody>    
-</table></td></tr></tbody>    
-</table></div><div id="dv_3" class="blk_wrapper" style="">    
-<table width="600" cellspacing="0" cellpadding="0" border="0" class="blk" name="blk_image"><tbody><tr><td>    
-<table width="100%" cellspacing="0" cellpadding="0" border="0"><tbody><tr><td align="center" class="bmeImage" style="border-collapse: collapse; padding: 20px;"><img    
- src="https://nutri-serve.herokuapp.com/assets/200px.png" width="90" style="max-width: 90px; display: block; width: 90px;" alt="" border="0"></td></tr></tbody>    
-</table></td></tr></tbody>    
-</table></div><div id="dv_9" class="blk_wrapper" style="">    
-<table width="600" cellspacing="0" cellpadding="0" border="0" class="blk" name="blk_divider" style=""><tbody><tr><td class="tblCellMain" style="padding: 20px 0px;">    
-<table class="tblLine" cellspacing="0" cellpadding="0" border="0" width="100%" style="border-top-width: 1px; border-top-color: rgb(223, 223, 223); border-top-style: solid; min-width: 1px;"><tbody><tr><td><span></span></td></tr></tbody>    
-</table></td></tr></tbody>    
-</table></div><div id="dv_12" class="blk_wrapper" style="">    
-<table width="600" cellspacing="0" cellpadding="0" border="0" class="blk" name="blk_card"><tbody><tr><td class="bmeImageCard" align="center" style="padding-left:20px; padding-right:20px; padding-top:0px; padding-bottom:0px;">    
-<table width="100%" cellspacing="0" cellpadding="0" border="0"><tbody><tr><td valign="top" class="bmeImageContainer" style="border-collapse: collapse; background-color: rgba(0, 0, 0, 0);" width="560">    
-<table cellspacing="0" cellpadding="0" border="0" width="100%"><tbody><tr><td valign="top" align="center" class="tdPart">    
-<table cellspacing="0" cellpadding="0" border="0" class="bmeCaptionTable" style="float: left;" width="373" align="left"><tbody><tr><td style="padding: 20px 0px 20px 20px; font-family: Arial, Helvetica, sans-serif; font-weight: normal; font-size: 14px; color: rgb(56, 56, 56); text-align: left;" name="tblCell" valign="top" align="left" class="tblCell"><div style="line-height: 150%;"><span style="font-size: 18px; font-family: Helvetica, Arial, sans-serif; color: #1e1e1e; line-height: 150%;"><strong> Programa de alimentación</strong></span>    
-<br><span style="font-size: 30px; font-family: Helvetica, Arial, sans-serif; color: #d63c3c; line-height: 150%;">    
-<em><strong>Sesión # {{$conteo}}</strong></em></span>    
-<br><span style="font-size: 14px; font-family: Helvetica, Arial, sans-serif; color: #929292; line-height: 150%;"><strong>No es una dieta</strong> Es un estilo de vida</span>    
-<br>    
-<br>    
-</div></td></tr></tbody>    
-</table></td><td valign="top" align="center" class="tdPart">    
-<table cellspacing="0" cellpadding="0" border="0" class="bmeImageTable" style="float: right; height: 222px;" align="right" dimension="30%" width="187" height="222"><tbody><tr><td name="bmeImgHolder" style="padding:20px;" align="left" valign="top" height="182"><img    
- src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/ingredients-for-spring-vegetable-buddha-bowl-royalty-free-image-656873420-1558126238.jpg?crop=0.707xw:1.00xh;0.147xw,0&resize=640:*" width="147" style="max-width: 250px; display: block;" alt="" border="0"></td></tr></tbody>    
-</table></td></tr></tbody>    
-</table></td></tr></tbody>    
-</table></td></tr></tbody>    
-</table></div><div id="dv_13" class="blk_wrapper" style="">    
-<table width="600" cellspacing="0" cellpadding="0" border="0" class="blk" name="blk_button" style=""><tbody><tr><td width="40"></td><td align="center">    
-<table class="tblContainer" cellspacing="0" cellpadding="0" border="0" width="100%"><tbody><tr><td height="0"></td></tr><tr><td align="left">    
-<table cellspacing="0" cellpadding="0" border="0" class="bmeButton" align="left" style="border-collapse: separate;"><tbody><tr><td style="border-radius: 20px; border: 0px none transparent; text-align: center; font-family: Arial, Helvetica, sans-serif; font-size: 14px; padding: 10px 40px; font-weight: bold; background-color: rgb(214, 60, 60);" class="bmeButtonText"><span style="font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: rgb(255, 255, 255);">    
-<a style="color:#FFFFFF;text-decoration:none;" href="{{$urlDieta}}" target="_blank">Descargar</a></span></td></tr></tbody>    
-</table></td></tr><tr><td height="0"></td></tr></tbody>    
-</table></td><td width="40"></td></tr></tbody>    
-</table></div><div id="dv_14" class="blk_wrapper" style="">    
-<table width="600" cellspacing="0" cellpadding="0" border="0" class="blk" name="blk_divider" style=""><tbody><tr><td class="tblCellMain" style="padding: 10px 0px;">    
-<table class="tblLine" cellspacing="0" cellpadding="0" border="0" width="100%" style="border-top-width: 0px; border-top-style: none; min-width: 1px;"><tbody><tr><td><span></span></td></tr></tbody>    
-</table></td></tr></tbody>    
-</table></div><div id="dv_4" class="blk_wrapper" style="">    
-<table width="600" cellspacing="0" cellpadding="0" border="0" class="blk" name="blk_divider" style=""><tbody><tr><td class="tblCellMain" style="padding: 20px 0px;">    
-<table class="tblLine" cellspacing="0" cellpadding="0" border="0" width="100%" style="border-top-width: 1px; border-top-color: rgb(223, 223, 223); border-top-style: solid; min-width: 1px;"><tbody><tr><td><span></span></td></tr></tbody>    
-</table></td></tr></tbody>    
-</table></div><div id="dv_15" class="blk_wrapper" style="">    
-<table width="600" cellspacing="0" cellpadding="0" border="0" class="blk" name="blk_card"><tbody><tr><td class="bmeImageCard" align="center" style="padding-left:20px; padding-right:20px; padding-top:0px; padding-bottom:0px;">    
-<table width="100%" cellspacing="0" cellpadding="0" border="0"><tbody><tr><td valign="top" class="bmeImageContainer" style="border-collapse: collapse; background-color: rgba(0, 0, 0, 0);" width="560">    
-<table cellspacing="0" cellpadding="0" border="0" width="100%"><tbody><tr><td valign="top" align="center" class="tdPart">    
-<table cellspacing="0" cellpadding="0" border="0" class="bmeCaptionTable" style="float: left;" width="373" align="left"><tbody><tr><td style="padding: 20px 0px 20px 20px; font-family: Arial, Helvetica, sans-serif; font-weight: normal; font-size: 14px; color: rgb(56, 56, 56); text-align: left;" name="tblCell" valign="top" align="left" class="tblCell"><div style="line-height: 150%;"><span style="font-size: 18px; font-family: Helvetica, Arial, sans-serif; color: #1e1e1e; line-height: 150%;"><strong>Programa de entrenamiento</strong></span>    
-<br><span style="font-size: 30px; font-family: Helvetica, Arial, sans-serif; color: #d63c3c; line-height: 150%;">    
-<em><strong>Sesión # {{$conteo}}</strong></em></span>    
-<br><span style="font-size: 14px; font-family: Helvetica, Arial, sans-serif; color: #929292; line-height: 150%;"><strong>Mejora el rendimiento</strong> Físico e intelectual</span>    
-<br>    
-<br>    
-</div></td></tr></tbody>    
-</table></td><td valign="top" align="center" class="tdPart">    
-<table cellspacing="0" cellpadding="0" border="0" class="bmeImageTable" style="float: right; height: 222px;" align="right" dimension="30%" width="187" height="222"><tbody><tr><td name="bmeImgHolder" style="padding:20px;" align="left" valign="top" height="182"><img    
- src="https://www.cenfyd.com/wp-content/uploads/2018/12/LOGO-1-1.png" width="147" style="max-width: 250px; display: block;" alt="" border="0"></td></tr></tbody>    
-</table></td></tr></tbody>    
-</table></td></tr></tbody>    
-</table></td></tr></tbody>    
-</table></div><div id="dv_16" class="blk_wrapper" style="">    
-<table width="600" cellspacing="0" cellpadding="0" border="0" class="blk" name="blk_button" style=""><tbody><tr><td width="40"></td><td align="center">    
-<table class="tblContainer" cellspacing="0" cellpadding="0" border="0" width="100%"><tbody><tr><td height="0"></td></tr><tr><td align="left">    
-<table cellspacing="0" cellpadding="0" border="0" class="bmeButton" align="left" style="border-collapse: separate;"><tbody><tr><td style="border-radius: 20px; border: 0px none transparent; text-align: center; font-family: Arial, Helvetica, sans-serif; font-size: 14px; padding: 10px 40px; font-weight: bold; background-color: rgb(214, 60, 60);" class="bmeButtonText"><span style="font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: rgb(255, 255, 255);">    
-<a style="color:#FFFFFF;text-decoration:none;" href="{{$urlEntrenamiento}}" target="_blank">Descargar</a></span></td></tr></tbody>    
-</table></td></tr><tr><td height="0"></td></tr></tbody>    
-</table></td><td width="40"></td></tr></tbody>    
-</table></div>
+.cabecera {
+    width: 840px;
+    text-align: center;
+    margin: auto;
+    color: white;
+}
 
+.logo {
+    width: 840px;
+    margin: auto;
+    padding-top: 40px;
+    text-align: center;
+}
 
-</td></tr> <tr><td width="100%" class="blk_container bmeHolder" name="bmePreFooter" valign="top" align="center" style="border: 0px none transparent; background-color: rgb(255, 255, 255);" bgcolor="#ffffff">
+footer {
+    color: white;
+    width: 720px;
+    margin: auto;
+    text-align: center;
+}
 
-<div id="dv_17" class="blk_wrapper" style="">    
-<table width="600" cellspacing="0" cellpadding="0" border="0" class="blk" name="blk_divider" style=""><tbody><tr><td class="tblCellMain" style="padding: 20px 0px;">    
-<table class="tblLine" cellspacing="0" cellpadding="0" border="0" width="100%" style="border-top-width: 0px; border-top-style: none; min-width: 1px;"><tbody><tr><td><span></span></td></tr></tbody>    
-</table></td></tr></tbody>    
-</table></div></td></tr> </tbody>    
-</table> </td></tr>  <tr><td width="100%" class="blk_container bmeHolder" name="bmeFooter" valign="top" align="center" style="color: rgb(102, 102, 102); border: 0px none transparent;" bgcolor=""><div id="dv_5" class="blk_wrapper">    
-<table width="600" cellspacing="0" cellpadding="0" border="0" class="blk" name="blk_permission" style=""><tbody><tr><td name="tblCell" class="tblCell" style="padding:20px;" valign="top" align="left">    
-<table cellpadding="0" cellspacing="0" border="0" width="100%"><tbody><tr><td name="bmePermissionText" style="text-align:left;" align="left"><span style="font-family: Arial, Helvetica, sans-serif; font-weight: normal; font-size: 11px;line-height: 140%;"> 
-</span></td></tr></tbody>    
-</table></td></tr></tbody>    
-</table></div><div id="dv_6" class="blk_wrapper">    
-</div></td></tr> </tbody>    
-</table></td></tr></tbody>    
-</table></td></tr></tbody>    
-</table>    
+.centrar {
+    color: white;
+    padding: 30px;
+    margin: auto;
+}
 
-</body>    
+.iconos {
+    padding: 30px;
+}
+
+.contenido {
+    width: 720px;
+    margin: auto;
+}
+
+.boton {
+    background-color: #d9534f;
+    color: white;
+    font-size: 30px;
+    padding: 10px;
+    border-radius: 14px;
+    border: 0px;
+	text-decoration: none;
+}
+
+.contIm {
+    text-align: right;
+}
+
+.cent {
+    text-align: center;
+}
+
+.programa {
+    font-size: 25px;
+}
+
+.sesion {
+    font-size: 23px;
+    color: #d9534f;
+}
+
+.gris {
+    color: #292b2c;
+    font-size: 19px;
+}
+
+.rojo {
+    color: #d9534f;
+}
+a{
+    text-decoration: none;
+}
+
+    </style>
+</head>
+
+<body class="black">
+    <div class="cabecera">
+        <h1> <span class="rojo">Fitness</span> & <span>shape system</span> </h1>
+    </div>
+
+    <div class="container">
+        <div class="logo">
+            <img src="https://nutri-serve.herokuapp.com/assets/200px.png" alt="">
+        </div>
+        <div>
+            <table class="contenido">
+                <tr>
+                    <td class="cent">
+                        <h3 class="programa">Programa de alimentación
+                        </h3>
+                        <h2 class="sesion">Sesión # {{$conteo}}
+                        </h2>
+                        <p class="gris"><b>No es una dieta</b> Es un estilo de vida
+                        </p>
+                        <br>
+                        <a  href="{{$urlDieta}}" class="boton">Descargar</a>
+                    </td>
+                    <td class="contIm">
+                        <img width="250px" src="{{url('/assets/dieta.jpg')}}" alt="">
+                    </td>
+                </tr>
+            </table>
+            <table class="contenido">
+                <tr>
+                    <td class="cent">
+                        <h3 class="programa">Programa de entrenamiento
+                        </h3>
+                        <h2 class="sesion">Sesión # {{$conteo}}
+                        </h2>
+                        <p class="gris">
+                            <b>Mejora el rendimiento </b> Físico e intelectual
+                        </p>
+                        <br>
+                        <a  href="{{$urlEntrenamiento}}" class="boton">Descargar</a>
+                    </td>
+                    <td class="contIm">
+                        <img width="310px" src="{{url('/assets/entrenamiento.png')}}" alt="">
+                    </td>
+                </tr>
+            </table>
+            <br><br>
+
+        </div>
+    </div>
+    <footer>
+        <table class="centrar">
+            <tr>
+                <td class="iconos">
+                    <a href=""><img src="{{ url('/assets/instagram.png') }}" alt=""></a>
+
+                </td>
+                <td class="iconos">
+                    <a href=""> <img src="{{ url('/assets/facebook.png') }}"  alt="">
+                    </a>
+                </td>
+                <td class="iconos">
+                    <a href=""> <img src="{{ url('/assets/gorjeo.png') }}"  alt="">
+                    </a>
+                </td>
+                <td class="iconos">
+                    <a href=""> <img src="{{ url('/assets/youtube.png') }}"  alt="">
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </footer>
+</body>
+
 </html>

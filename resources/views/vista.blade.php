@@ -10,7 +10,7 @@
        * {
     margin: 0;
     padding: 0;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
 
 .titulo {
@@ -147,7 +147,7 @@ ul {
 
 #contNotas {
     width: 100%;
-    height: 150px;
+    height: 70px;
     border-radius: 10px;
     padding: 10px;
     background-color: rgb(128, 128, 128, .50);
@@ -162,6 +162,11 @@ ul {
 }
 .taman {
     font-size: 15px;
+}
+.detalle{
+    font-size: 13px;
+    color: #292b2c;
+
 }
     </style>
 </head>
@@ -179,7 +184,7 @@ ul {
     </div>
 
  <table>
-        <tr class="taman">
+        <tr class="taman" style="font-size: 14px;">
             <td style="border:none;" class="text-nombre">
                 <ul>
                     <li>Fecha: </li>
@@ -206,36 +211,40 @@ ul {
             <td style="border:none;" class="text-nombre">
                 <ul>
                     <li>
-                        <h3>{{ $comidas['nombre'] }}</h3>
+                        <p style="font-size: 14px;">{{ $comidas['nombre'] }}</p>
                     </li>
                     <li>
-                        <h4>
-                            {{ $comidas['notas'] }}
-                        </h4>
+                        <p style="font-size: 12px;">
+                            {{ $comidas['descripcion'] }}
+                        </p>
                     </li>
                 </ul>
             </td>
-            <td style="border:none;">
+            <td style="border:none; vertical-align:text-top;">
                 <ul>
                     @foreach (json_decode($comidas['det_comidas'], true) as $det) 
                     <li>
-                        {{$det['cantidad']}} {{$det['unidad']}} de {{$det['alimento']}}
+                        <p class="detalle" style="font-size: 10px;">{{$det['cantidad']}} {{$det['unidad']}} de {{$det['alimento']}}</p>
                     </li>
                     @endforeach
                 </ul>
+            </td>
+            <td style="border:none; vertical-align:text-top;">
+                <p style="font-size: 12px;">Notas</p>
+                <p style="font-size: 9px; text-align: center;">
+                    {{ $comidas['notas'] }}
+                </p>
             </td>
         </tr>
     </table>
     @endforeach
     <div class="notas">
-        <h4>Observaciones</h4>
+        <p style="font-size: 12px;">Observaciones</p>
         <div id="contNotas">
-            <p>
+            <p style="font-size: 13px;">
                 {{$data['notas_dieta']}}
             </p>
         </div>
     </div>
-
-  
 </body>
 </html>

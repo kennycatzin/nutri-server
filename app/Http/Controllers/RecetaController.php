@@ -82,7 +82,7 @@ class RecetaController extends Controller
     ->join('clasificaciones', 'clasificaciones.id', '=', 'recetas.clasificacion_id')
     ->select('recetas.*', 'clasificaciones.nombre AS clasificacion')
     ->skip($desde)
-    ->take($hasta)
+    ->take(6)
     ->orderBy('recetas.nombre', 'ASC')
     ->get();
     return $this->crearRespuesta($data, 200);
@@ -99,7 +99,7 @@ class RecetaController extends Controller
     ->select('recetas.*', 'clasificaciones.nombre AS clasificacion')
     ->where('recetas.clasificacion_id', $id_clasificacion)
     ->skip($desde)
-    ->take($hasta)
+    ->take(6)
     ->get();
     return $this->crearRespuesta($data, 200);
    }

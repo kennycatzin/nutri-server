@@ -77,7 +77,7 @@ class AlimentoController extends Controller
             $desde+=$valor;
             $hasta+=$valor;
         }
-        $query = DB::table('alimentos')->skip($desde)->take($hasta)->get();
+        $query = DB::table('alimentos')->skip($desde)->take(6)->get();
         return $this->crearRespuesta($query, 200);
     }
     public function getClasificacion($id){

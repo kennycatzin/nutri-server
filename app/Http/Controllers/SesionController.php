@@ -105,6 +105,7 @@ class SesionController extends Controller
                         'calorias'=> $comida['calorias'],
                         'dieta_id'=> $dietaId,
                         'notas'=> $comida['notas'],
+                        'descripcion'=> $comida['descripcion'],
                         'created_at'=> $mytime,
                         'updated_at'=> $mytime
                         ]
@@ -112,9 +113,9 @@ class SesionController extends Controller
                     $comidaId = DB::getPdo()->lastInsertId();
                  }else{
                      DB::update('update comidas set 
-                     nombre = ?, calorias = ?, notas = ?, updated_at = ?
+                     nombre = ?, calorias = ?, notas = ?, updated_at = ?, descripcion = ?
                      where id = ?', 
-                     [$comida['nombre'], $comida['calorias'], $comida['notas'], $mytime, $comidaId]);
+                     [$comida['nombre'], $comida['calorias'], $comida['notas'], $mytime, $comida['descripcion'], $comidaId]);
                  }       
                 $detComidas = $comida['det_comidas'];
                 foreach($detComidas as $detalleComida){
@@ -239,7 +240,7 @@ class SesionController extends Controller
                 ->get();
 
         $comidas = DB::table('comidas')
-                ->select('id', 'nombre', 'calorias', 'notas')
+                ->select('id', 'nombre', 'calorias', 'notas', 'descripcion')
                 ->where('dieta_id', $dieta[0]->id)
                 ->get();
         foreach($comidas as $comida){
@@ -403,7 +404,7 @@ class SesionController extends Controller
                 ->where('sesion_id', $id)
                 ->get();
         $comidas = DB::table('comidas')
-                ->select('id', 'nombre', 'calorias', 'notas')
+                ->select('id', 'nombre', 'calorias', 'notas', 'descripcion')
                 ->where('dieta_id', $dieta[0]->id)
                 ->get();
         foreach($comidas as $comida){

@@ -132,7 +132,7 @@ class EjercicioController extends Controller
         ->join('clasificaciones', 'clasificaciones.id', '=', 'ejercicios.clasificacion_id')
         ->select('ejercicios.*', 'clasificaciones.nombre AS clasificacion')
         ->skip($desde)
-        ->take($hasta)
+        ->take(6)
         ->get();
         return $this->crearRespuesta($query, 200);
 

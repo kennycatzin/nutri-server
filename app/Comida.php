@@ -10,7 +10,7 @@ class Comida extends Model
     protected $table = 'comidas';
 
     protected $fillable = [
-        'id', 'nombre', 'calorias', 'dieta_id', "notas"
+        'id', 'nombre', 'calorias', 'dieta_id', "notas", 'descripcion'
     ];
 
     
