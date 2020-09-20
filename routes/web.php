@@ -110,5 +110,11 @@ $router->group(['prefix' => 'api/unidades'], function () use ($router) {
     $router->get('get-byid/{id}', 'UnidadController@getById');
 
 });
+$router->group(['prefix' => 'api/imagen'], function () use ($router) {
+
+    $router->post('file-upload/{tipo}/{id}', 'ImagenController@fileUpload');
+    $router->get('get-imagen/{tipo}/{id}', 'ImagenController@getImagen');
+
+});
 
 
