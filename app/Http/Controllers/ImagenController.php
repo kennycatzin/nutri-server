@@ -66,7 +66,6 @@ class ImagenController extends Controller
         ->count();
        }
        else if($tipo == 'ejercicio'){
-
        } else if ($tipo == 'receta'){
         $data = DB::table('recetas')
         ->select('imagen')
@@ -80,11 +79,11 @@ class ImagenController extends Controller
 
        }
         if($count > 0 and $data[0]->imagen != '' ){
-            $vari = env("APP_URL", "localhost").'/upload/'.$tipo.'/'.$data[0]->imagen;
+            $vari = env("APP_URL", "localhost").'/nutri-server/public/upload/'.$tipo.'/'.$data[0]->imagen;
         }else{
-            $vari = env("APP_URL", "localhost").'/assets/not-found.png';
+            $vari = env("APP_URL", "localhost").'/nutri-server/public/assets/not-found.png';
         }
-        return $this->crearRespuesta($vari, 200);
+        return $vari;
     }
     
 }

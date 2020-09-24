@@ -85,6 +85,10 @@ class RecetaController extends Controller
     ->take(6)
     ->orderBy('recetas.nombre', 'ASC')
     ->get();
+    foreach($data as $da){
+        $ruta = $this->imagenRuta($da->imagen, 'receta');
+        $da->imagen = $ruta;
+    }
     return $this->crearRespuesta($data, 200);
    }
    public function getRecetasClasificacion($id_clasificacion, $valor){
@@ -101,6 +105,10 @@ class RecetaController extends Controller
     ->skip($desde)
     ->take(6)
     ->get();
+    foreach($data as $da){
+        $ruta = $this->imagenRuta($da->imagen, 'receta');
+        $da->imagen = $ruta;
+    }
     return $this->crearRespuesta($data, 200);
    }
    public function busqueda(Request $request){
@@ -111,6 +119,10 @@ class RecetaController extends Controller
     ->orWhere('recetas.nombre', 'LIKE', '%'.$valor.'%')
     ->take(8)
     ->get();
+    foreach($query as $da){
+        $ruta = $this->imagenRuta($da->imagen, 'receta');
+        $da->imagen = $ruta;
+    }
     return $this->crearRespuesta($query, 200);
    }
    public function getInfoReceta($id_receta){

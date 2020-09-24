@@ -17,4 +17,24 @@ class Controller extends BaseController
         return $this->crearRespuestaError($errors, 422);
 
     }
+    public function imagenRuta($imagen, $tipo) {
+        $ubicacion = '';
+        if($imagen){
+            if($tipo == 'paciente'){
+            $ubicacion = '/upload/paciente/' . $imagen;
+        }else if ($tipo == 'receta'){
+            $ubicacion = '/upload/receta/' . $imagen;
+        }
+        }else{
+            $ubicacion = 'sin ubicacion';
+        }
+        $path = '.'.$ubicacion;
+        $respuesta = '';
+        if(!file_exists($path)) {
+            $respuesta= '/assets/not-found.png';
+        }else{
+            $respuesta = $ubicacion;
+        }
+       return $respuesta;
+    }
 }
