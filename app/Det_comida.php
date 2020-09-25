@@ -10,7 +10,7 @@ class Det_comida extends Model
     protected $table = 'det_comidas';
 
     protected $fillable = [
-        'id', 'cantidad', 'alimento_id', 'comida_id'
+        'id', 'cantidad', 'alimento_id', 'comida_id', 'unidad_id'
     ];
 
     public function comida()

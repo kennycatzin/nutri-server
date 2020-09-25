@@ -10,7 +10,7 @@ class Ejercicio extends Model
     protected $table = 'ejercicios';
 
     protected $fillable = [
-        'id', 'nombre', 'imagen', 'clasificacion_id'
+        'id', 'nombre', 'imagen', 'clasificacion_id', 'descripcion'
     ];
 
     public function clasificacion()

@@ -5,27 +5,25 @@ use App\Pasiente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use File;
+use Illuminate\Http\File as File;
+
 
 class PasienteController extends Controller
 {
     public function fileUpload(Request $request, $id) {
         $pasiente = Pasiente::find($id);
         $response = null;
-        $user = (object) ['image' => ""];
+        $user = (object) ['imagen' => ""];
         if  (!is_null($pasiente)){
-            if ($request->hasFile('image')) {
-                $original_filename = $request->file('image')->getClientOriginalName();
+            if ($request->hasFile('imagen')) {
+                $original_filename = $request->file('imagen')->getClientOriginalName();
                 $original_filename_arr = explode('.', $original_filename);
                 $file_ext = end($original_filename_arr);
-                $destination_path = './upload/user/';
-                $image = 'U-' . $id . '.' . $file_ext;
-    
-                if ($request->file('image')->move($destination_path, $image)) {
-                    $user->image = '/upload/user/' . $image;
-                   
+                $destination_path = './upload/pasiente/';
+                $image = 'P-' . $id . '.' . $file_ext;
+                if ($request->file('imagen')->move($destination_path, $image)) {
+                    $user->image = './upload/pasiente/'.$image;
                     $pasiente->imagen = $image;
-    
                     $pasiente->save();
                 return $this->crearRespuesta('La imagen ha sido subida con éxito', 201);
                 } else {
@@ -39,33 +37,68 @@ class PasienteController extends Controller
             return $this->crearRespuestaError('No existe el usuario', 400);
         }
     }
-    public function imagenUsuario($id) {
-        $path = resource_path() . './upload/user/' . 'U-'.$id. 'png';
-
-        if(!File::exists($path)) {
-            return response()->json(['message' => 'Image not found.'], 404);
+    public function imagenUsuario($imagen) {
+        $ubicacion = '/upload/paciente/' . $imagen;
+        $path = '.'.$ubicacion;
+        $respuesta = '';
+        if(!file_exists($path)) {
+            $respuesta= '/assets/not-found.png';
+        }else{
+            $respuesta = $ubicacion;
         }
-    
-        $file = File::get($path);
-        $type = File::mimeType($path);
-    
-        $response = Response::make($file, 200);
-        $response->header("Content-Type", $type);
-
-
-        return $response;
+       return $respuesta;
+    }
+    public function paginacion($valor){
+        $desde=0;
+        $hasta=6;
+        $contador = 0;
+        $ruta = '';
+        if($valor>0){
+            $desde+=$valor;
+            $hasta+=$valor;
+        }
+        $query = DB::table('pasientes')->skip($desde)->take(6)->get();
+        foreach($query as $pac){
+            $ruta = $this->imagenRuta($pac->imagen, 'paciente');
+            $pac->imagen = $ruta;
+        }
+        return $this->crearRespuesta($query, 200);
     }
     public function index() {
         $pasiente=Pasiente::all();
+        foreach($pasiente as $pac){
+            $ruta = $this->imagenRuta($pac->imagen, 'paciente');
+            $pac->imagen = $ruta;
+        }
         return $this->crearRespuesta($pasiente, 200);
     }
     public function store(Request $request) {
         $this->validacion($request);
         Pasiente::create($request->all());
+        $ultimo=DB::getPdo()->lastInsertId();
+        $this->fileUpload($request, $ultimo);
         return $this->crearRespuesta('El elemento ha sido creado', 201);
     }
     public function show($id) {
-        $pasiente = Pasiente::find($id);
+        $pasiente = DB::table('pasientes')
+        ->select(DB::raw('concat(nombres, " ", apellidopaterno, " ", apellidomaterno) as nombres'),
+        'correo', 'objetivo', 'fechanacimiento', 'estatura', 'genero', 'imagen')
+        ->where('id', $id)
+        ->get();
+        foreach($pasiente as $pac){
+           
+            $ruta = $this->imagenRuta($pac->imagen, 'paciente');
+            $pac->imagen = $ruta;
+            
+        }
+        $historial = DB::table('sesiones')
+        ->select('id', 'imc', 'peso', 'pctgrasa', 'masa_muscular', 'metabolismo_basal', 'created_at as fecha')
+        ->where('paciente_id', $id)
+        ->orderBy('created_at', 'DESC')
+        ->take(10)
+        ->get();
+        $pasiente=json_decode(json_encode($pasiente), true);
+        $pasiente[0]+=["historial"=>$historial];
         if($pasiente){
             return $this->crearRespuesta($pasiente, 200);
         }
@@ -74,7 +107,7 @@ class PasienteController extends Controller
     public function update(Request $request, $id) {
         $pasiente = Pasiente::find($id);
         if  (!is_null($pasiente)){
-            $this->validacion($request);
+            // $this->validacion($request);
             $nombres = $request->get('nombres');
             $apellidopaterno = $request->get('apellidopaterno');
             $apellidomaterno = $request->get('apellidomaterno');
@@ -123,24 +156,21 @@ class PasienteController extends Controller
         ];
         $this->validate($request, $reglas);
     }
-    public function busqueda($valor){
+    public function busqueda(Request $request){
+        $valor = $request['busqueda'];
         $query = Pasiente::orWhere('nombres', 'LIKE', '%'.$valor.'%')
         ->orWhere('apellidopaterno', 'LIKE', '%'.$valor.'%')
         ->orWhere('apellidomaterno', 'LIKE', '%'.$valor.'%')
         ->get();
-        return $this->crearRespuesta($query, 200);
-
-    }
-    public function paginacion($valor){
-        $desde=0;
-        $hasta=6;
-        if($valor>0){
-            $desde+=$valor;
-            $hasta+=$valor;
+        foreach($query as $pac){
+           
+            $ruta = $this->imagenRuta($pac->imagen, 'paciente');
+            $query->imagen = $ruta;
+            
         }
-        $query = DB::table('pasientes')->skip($desde)->take($hasta)->get();
         return $this->crearRespuesta($query, 200);
 
     }
+ 
 }
  

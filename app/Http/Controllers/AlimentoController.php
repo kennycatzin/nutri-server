@@ -32,12 +32,15 @@ class AlimentoController extends Controller
             $grasas = $request->get('grasas');
             $carbohidratos = $request->get('carbohidratos');
             $clasificacion_id = $request->get('clasificacion_id');
+            $calorias= $request->get('calorias');
 
             $alimento->nombre = $nombre;
             $alimento->proteinas = $proteinas;
             $alimento->grasas = $grasas;
             $alimento->carbohidratos = $carbohidratos;
             $alimento->clasificacion_id = $clasificacion_id;
+            $alimento->calorias = $calorias;
+
 
             $alimento->save();
             return $this->crearRespuesta('El alimento ha sido modificado', 201);
@@ -61,7 +64,8 @@ class AlimentoController extends Controller
         ];
         $this->validate($request, $reglas);
     }
-    public function busqueda($valor){
+    public function busqueda(Request $request){
+        $valor = $request['busqueda'];
         $query = Alimento::orWhere('nombre', 'LIKE', '%'.$valor.'%')->get();
         return $this->crearRespuesta($query, 200);
 
@@ -73,9 +77,12 @@ class AlimentoController extends Controller
             $desde+=$valor;
             $hasta+=$valor;
         }
-        $query = DB::table('alimentos')->skip($desde)->take($hasta)->get();
+        $query = DB::table('alimentos')->skip($desde)->take(6)->get();
         return $this->crearRespuesta($query, 200);
-
+    }
+    public function getClasificacion($id){
+        $data = Alimento::where('clasificacion_id', $id)->get();
+        return $this->crearRespuesta($data, 200);
     }
 }
  
