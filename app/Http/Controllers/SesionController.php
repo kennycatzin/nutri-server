@@ -354,8 +354,8 @@ class SesionController extends Controller
         }
     public function sendPDFs($sesion){
         $infoUsuario = $this->getInfoUsuario($sesion);
-        $urlDieta = env("APP_URL", "localhost").'/nutri-server/public/api/sesiones/dieta/'.$sesion ;
-        $urlEntrenamiento = env("APP_URL", "localhost").'/nutri-server/public/api/sesiones/entrenamiento/'.$sesion;
+        $urlDieta = env("APP_URL", "localhost").'/public/api/sesiones/dieta/'.$sesion ;
+        $urlEntrenamiento = env("APP_URL", "localhost").'/public/api/sesiones/entrenamiento/'.$sesion;
         $mytime = Carbon::now();
         setlocale(LC_ALL, 'es_ES');
         $fecha = Carbon::parse($mytime);
@@ -376,6 +376,35 @@ class SesionController extends Controller
                 // $message->attachData($pdf2->output(),'dieta.pdf');
             });
                return "se envio";
+           } catch (\Throwable $th) {
+              echo $th;
+           }
+    }
+    public function correo(){
+        $data = [
+            'nombre' => 'Jaded Enrique Ruiz Pech',
+            'peso' => '74 Kilos'
+        ];
+        $datos=[];
+        $pdf1 = '';
+        $pdf2 = '';
+        
+        try {
+            $to_name = 'TO_NAME';
+            $to_email = 'kenn2506@gmail.com';
+            $data = array('email' => 'kenn2506@gmail.com');
+                
+            Mail::send('prueba',$data, function($message) use ($pdf1, $pdf2)
+            {
+                $message->from('roly_alme@hotmail.com', 'Laravel');
+            
+                $message->to('kenn2506@gmail.com')->cc('kenn2506@gmail.com');
+                // $message->attachData($pdf1->output(),'entrenamiento.pdf');
+                // $message->attachData($pdf2->output(),'dieta.pdf');
+            });
+          
+               return "se envio";
+    
            } catch (\Throwable $th) {
               echo $th;
            }

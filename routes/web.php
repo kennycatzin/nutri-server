@@ -90,7 +90,10 @@ $router->group(['prefix' => 'api/sesiones'], function () use ($router) {
     $router->get('email', 'SesionController@update');
 
     $router->get('get-sesion/{id}', 'SesionController@getSesion');
+    $router->get('correo', 'SesionController@correo');
 
+
+    
 });
 
 $router->group(['prefix' => 'api/recetas'], function () use ($router) {
