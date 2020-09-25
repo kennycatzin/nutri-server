@@ -128,7 +128,7 @@ a{
                         <a  href="{{$urlDieta}}" class="boton">Descargar</a>
                     </td>
                     <td class="contIm">
-                        <img width="250px" src="{{url('/assets/dieta.jpg')}}" alt="">
+                        <img width="250px" src="https://nutri-serve.herokuapp.com/assets/dieta.jpg" alt="">
                     </td>
                 </tr>
             </table>
@@ -146,7 +146,7 @@ a{
                         <a  href="{{$urlEntrenamiento}}" class="boton">Descargar</a>
                     </td>
                     <td class="contIm">
-                        <img width="310px" src="{{url('/assets/entrenamiento.png')}}" alt="">
+                        <img width="310px" src="https://nutri-serve.herokuapp.com/assets/entrenamiento.png" alt="">
                     </td>
                 </tr>
             </table>

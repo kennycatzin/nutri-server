@@ -11,7 +11,8 @@
         "illuminate/mail": "6.17",
         "laravel/homestead": "^9.2",
         "laravel/lumen-framework": "^6.2.0",
-        "barryvdh/laravel-dompdf": "^0.8.6"
+        "barryvdh/laravel-dompdf": "^0.8.6",
+        "ext-gd": "*"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.4",

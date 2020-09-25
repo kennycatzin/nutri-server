@@ -8,10 +8,10 @@ return array(
         # Our primary database connection
         'mysql' => array(
             'driver'    => 'mysql',
-            'host'      => '127.0.0.1',
-            'database'  => 'nutricion',
-            'username'  => 'root',
-            'password'  => '',
+            'host'      => 'serteza.com',
+            'database'  => 'sertezac_nutricion',
+            'username'  => 'sertezac',
+            'password'  => '5erte34?crh',
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',

@@ -354,8 +354,13 @@ class SesionController extends Controller
         }
     public function sendPDFs($sesion){
         $infoUsuario = $this->getInfoUsuario($sesion);
+<<<<<<< HEAD
         $urlDieta = env("APP_URL", "localhost").'/public/api/sesiones/dieta/'.$sesion ;
         $urlEntrenamiento = env("APP_URL", "localhost").'/public/api/sesiones/entrenamiento/'.$sesion;
+=======
+        $urlDieta = env("APP_URL", "localhost").'/api/sesiones/dieta/'.$sesion ;
+        $urlEntrenamiento = env("APP_URL", "localhost").'/api/sesiones/entrenamiento/'.$sesion;
+>>>>>>> b45e5085a1962075a32994a7c3358c96b2c096db
         $mytime = Carbon::now();
         setlocale(LC_ALL, 'es_ES');
         $fecha = Carbon::parse($mytime);
