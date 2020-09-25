@@ -1,6 +1,6 @@
 /vendor
+/public/upload
 /.idea
 Homestead.json
 Homestead.yaml
 .env
-/public/upload
