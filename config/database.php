@@ -7,11 +7,11 @@ return array(
 
         # Our primary database connection
         'mysql' => array(
-            'driver'    => 'mysql',
-            'host'      => 'serteza.com',
-            'database'  => 'sertezac_nutricion',
-            'username'  => 'sertezac',
-            'password'  => '5erte34?crh',
+            'driver'    => env('DB_CONNECTION', ''),
+            'host'      => env('DB_HOST', ''),
+            'database'  => env('DB_DATABASE', ''),
+            'username'  => env('DB_USERNAME', ''),
+            'password'  => env('DB_PASSWORD', ''),
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
